@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Drink Water 2</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="drink_water_repetitive_alarms">Drink Water Repetitive Alarms</string>
+    <string name="_10_min">10 Min</string>
+</resources>
