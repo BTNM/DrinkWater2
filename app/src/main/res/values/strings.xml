@@ -9,4 +9,11 @@
     <string name="on">On</string>
     <string name="drink_water_repetitive_alarms">Drink Water Repetitive Alarms</string>
     <string name="_10_min">10 Min</string>
+    <string name="_15_min">15 Min</string>
+    <string name="_30_min">30 Min</string>
+    <string name="_45_min">45 Min</string>
+    <string name="_1_hour">1 Hour</string>
+    <string name="_1_5_hour">1,5 Hour</string>
+    <string name="_2_hour">2 Hour</string>
+    <string name="_3_hour">3 Hour</string>
 </resources>
