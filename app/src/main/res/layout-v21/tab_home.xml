@@ -1,261 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/water_background"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="@drawable/water_background"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
+
+    <TextView
+        android:id="@+id/textGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/drink_water_repetitive_alarms"
+        android:textColor="@color/design_default_color_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGrid">
 
         <TextView
-            android:id="@+id/textGrid"
+            android:id="@+id/textSwitch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="@string/drink_water_repetitive_alarms"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:text="@string/_10_min" />
 
-    </RelativeLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
-        android:columnCount="7"
-        android:rowCount="7"
-
-        android:layout_marginStart="1px"
-        android:padding="14dp">
-
-        <LinearLayout
+        <Switch
+            android:id="@+id/switch10m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="3"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_margin="8dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="testing text"
+            
+            android:showText="true"
+            android:textOff="@string/off"
+            android:textOn="@string/on" />
 
-            <TextView
-                android:id="@+id/textSwitch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_10_min" />
+    </LinearLayout>
 
-            <Switch
-                android:id="@+id/switch10m"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnTest"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textSwitch3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="2"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:text="@string/_15_min" />
 
-            <TextView
-                android:id="@+id/textSwitch3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_15_min" />
-
-            <Switch
-                android:id="@+id/switch15m"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <Switch
+            android:id="@+id/switch15m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="2"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textSwitch4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_30_min" />
+            android:layout_margin="8dp"
+            android:fontFamily="sans-serif-condensed"
+            android:showText="true"
+            android:textOff="@string/off"
+            android:textOn="@string/on" />
 
-            <Switch
-                android:id="@+id/switch30m"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="3"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textSwitch5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_45_min" />
-
-            <Switch
-                android:id="@+id/switch45m"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="5"
-            android:layout_row="3"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textSwitch6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_1_hour" />
-
-            <Switch
-                android:id="@+id/switch1h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="4"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textSwitch7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_1_5_hour" />
-
-            <Switch
-                android:id="@+id/switch1.5h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="4"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textSwitch8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_2_hour" />
-
-            <Switch
-                android:id="@+id/switch2h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_row="5"
-
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textSwitch9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_3_hour" />
-
-            <Switch
-                android:id="@+id/switch3h"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
-
-
-    </GridLayout>
 
     <Button
         android:id="@+id/btnTest"
@@ -263,11 +102,242 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="14dp"
-        android:text="Test Button 1" />
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Test Button 1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
+
+<!--<GridLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="0dp"-->
+<!--android:layout_weight="8"-->
+<!--android:alignmentMode="alignMargins"-->
+<!--android:columnOrderPreserved="false"-->
+<!--android:columnCount="7"-->
+<!--android:rowCount="7"-->
+
+<!--android:layout_marginStart="1px"-->
+<!--android:padding="14dp">-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_row="1"-->
+    <!--android:layout_column="3"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_10_min" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch10m"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="2"-->
+    <!--android:layout_row="2"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch3"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_15_min" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch15m"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="4"-->
+    <!--android:layout_row="2"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch4"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_30_min" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch30m"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="1"-->
+    <!--android:layout_row="3"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch5"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_45_min" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch45m"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="5"-->
+    <!--android:layout_row="3"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch6"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_1_hour" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch1h"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="2"-->
+    <!--android:layout_row="4"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch7"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_1_5_hour" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch1.5h"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="4"-->
+    <!--android:layout_row="4"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch8"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_2_hour" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch2h"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_column="3"-->
+    <!--android:layout_row="5"-->
+
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textSwitch9"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/_3_hour" />-->
+
+    <!--<Switch-->
+        <!--android:id="@+id/switch3h"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="8dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:showText="true"-->
+        <!--android:textOff="@string/off"-->
+        <!--android:textOn="@string/on" />-->
+
+<!--</LinearLayout>-->
+
+
+<!--</GridLayout>-->
 
     <!--<android.support.v7.widget.CardView-->
     <!--android:layout_width="wrap_content"-->
