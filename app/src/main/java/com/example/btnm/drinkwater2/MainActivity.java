@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
+        //ViewPagers animates screen slides automatically, then add the different tabs/fragment to the viewpager
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
-
+        //connect the vierpager to the tablelayout in the xml
         TabLayout tableLayout = (TabLayout) findViewById(R.id.allTabs);
         tableLayout.setupWithViewPager(mViewPager);
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        // SectionPageAdapter extends FragmentPageAdapter to add all fragments into a fragment list
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(),"Home");
         adapter.addFragment(new AlarmsFragment(),"Alarm List");

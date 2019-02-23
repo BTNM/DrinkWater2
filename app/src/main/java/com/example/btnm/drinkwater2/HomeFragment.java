@@ -1,6 +1,11 @@
 package com.example.btnm.drinkwater2;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +22,8 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
     private Button btnTest;
     Switch toggle10m;
+    private AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
 
 
     @Nullable
@@ -32,6 +39,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // switch connected to user interface
         toggle10m = view.findViewById(R.id.switch10m);
         toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -45,7 +53,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+//        Intent alarmIntent = new Intent(MyActivity.this, AlarmReceiver.class);
 
+
+//        alarmIntent = PendingIntent.getService(getContext(),0,intent,0)
+//        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
 
 
 
