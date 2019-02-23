@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
 
         // test master in git, written in master
-        // test branch in git, written in branch
+        // test branch in git, written in branch 
 
         return view;
     }
