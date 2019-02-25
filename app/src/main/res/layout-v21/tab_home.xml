@@ -57,7 +57,7 @@
             android:fontFamily="sans-serif-condensed"
             android:track="@drawable/switch_track_custom"
             android:thumb="@drawable/switch_thumb_custom"
-            
+            android:thumbTextPadding="24dp"
             android:showText="true"
             android:textOff="@string/off"
             android:textOn="@string/on" />
