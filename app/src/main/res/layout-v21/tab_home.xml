@@ -55,7 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="testing text"
+            android:track="@drawable/switch_track_custom"
+            android:thumb="@drawable/switch_thumb_custom"
             
             android:showText="true"
             android:textOff="@string/off"
@@ -67,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnTest"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
@@ -86,6 +87,7 @@
             android:id="@+id/switch15m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="testing text"
 
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
