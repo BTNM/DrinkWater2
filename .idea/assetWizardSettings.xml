@@ -33,8 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="insert_emoticon" />
-                            <entry key="sourceFile" value="C:\Users\Bao Thien" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_small_waterdrop" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\Bao Thien\Downloads\small_water_icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

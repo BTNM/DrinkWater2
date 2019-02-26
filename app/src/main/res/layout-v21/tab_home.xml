@@ -55,9 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
+            android:thumb="@drawable/ic_small_waterdrop"
             android:track="@drawable/switch_track_custom"
-            android:thumb="@drawable/switch_thumb_custom"
-            android:thumbTextPadding="24dp"
+            android:thumbTextPadding="12dp"
             android:showText="true"
             android:textOff="@string/off"
             android:textOn="@string/on" />
