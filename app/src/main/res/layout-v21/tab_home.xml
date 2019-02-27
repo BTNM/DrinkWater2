@@ -10,7 +10,6 @@
     android:weightSum="10"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/textGrid"
         android:layout_width="wrap_content"
@@ -29,9 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnTest"
@@ -51,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-smallcaps"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:text="@string/_10_min" />
 
         <Switch
@@ -64,44 +62,76 @@
             android:textOff="@string/off"
             android:textOn="@string/on"
             android:thumb="@drawable/switch_thumb_custom"
-            android:thumbTextPadding="12dp"
-            android:track="@drawable/switch_track_custom" />
+            android:track="@drawable/switch_track_custom"
+            android:thumbTextPadding="12dp" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnTest"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnTest"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.025">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/linearLayout "-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!---->
+        <!--android:orientation="vertical"-->
+        <!--android:gravity="center">-->
 
-        <TextView
-            android:id="@+id/textSwitch3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_15_min" />
+        <!--<TextView-->
+            <!--android:id="@+id/textSwitch"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:fontFamily="sans-serif-smallcaps"-->
+            <!--android:textSize="16sp"-->
+            <!--android:text="" />-->
 
-        <Switch
-            android:id="@+id/switch15m"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+        <!--<Switch-->
+            <!--android:id="@+id/switch "-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:fontFamily="sans-serif-condensed"-->
+            <!--android:showText="true"-->
+            <!--android:textOff="@string/off"-->
+            <!--android:textOn="@string/on"-->
+            <!--android:thumb="@drawable/switch_thumb_custom"-->
+            <!--android:track="@drawable/switch_track_custom"-->
+            <!--android:thumbTextPadding="12dp" />-->
 
-            android:fontFamily="sans-serif-condensed"
-            android:showText="true"
-            android:text="testing text"
-            android:textOff="@string/off"
-            android:textOn="@string/on" />
+    <!--</LinearLayout>-->
 
-    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/btnTest"-->
+        <!--android:layout_marginStart="32dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/btnTest"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+
+        <!--app:layout_constraintVertical_bias="0.025">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/textSwitch3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/_15_min" />-->
+
+        <!--<Switch-->
+            <!--android:id="@+id/switch15m"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="8dp"-->
+
+            <!--android:fontFamily="sans-serif-condensed"-->
+            <!--android:showText="true"-->
+            <!--android:text="testing text"-->
+            <!--android:textOff="@string/off"-->
+            <!--android:textOn="@string/on" />-->
+
+    <!--</LinearLayout>-->
 
 
     <Button
