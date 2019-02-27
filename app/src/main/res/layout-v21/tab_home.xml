@@ -36,10 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnTest"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textGrid">
 
@@ -47,6 +50,8 @@
             android:id="@+id/textSwitch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="16dp"
             android:text="@string/_10_min" />
 
         <Switch
@@ -55,12 +60,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
-            android:thumb="@drawable/ic_small_waterdrop"
-            android:track="@drawable/switch_track_custom"
-            android:thumbTextPadding="12dp"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
 
     </LinearLayout>
 
@@ -68,14 +73,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnTest"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/btnTest"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.025">
 
         <TextView
             android:id="@+id/textSwitch3"
@@ -87,11 +93,11 @@
             android:id="@+id/switch15m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="testing text"
-
             android:layout_margin="8dp"
+
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
+            android:text="testing text"
             android:textOff="@string/off"
             android:textOn="@string/on" />
 

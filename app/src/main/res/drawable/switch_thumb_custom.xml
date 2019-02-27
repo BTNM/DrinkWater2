@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/ic_small_waterdrop_blue" >
+                <color android:color="#E42F2F"/>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_checked="false">
+        <!--<color android:color="@color/colorPrimary"/>-->
+        <layer-list>
+            <item android:drawable="@drawable/ic_small_waterdrop_red">
+                <color android:color="@color/colorPrimary"/>
+            </item>
+        </layer-list>
+    </item>
+</selector>
 
+<!--<shape android:shape="oval" xmlns:android="http://schemas.android.com/apk/res/android" >-->
 
-<shape android:shape="oval" xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!--<solid android:color="@color/switchThumbkNormal"/>-->
 
-    <solid android:color="@color/switchThumbkNormal"/>
+    <!--<size android:width="28dp" android:height="28dp"/>-->
 
-    <size android:width="28dp" android:height="28dp"/>
-
-</shape>
+<!--</shape>-->
 
 <!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
     <!--<item android:state_checked="true">-->
