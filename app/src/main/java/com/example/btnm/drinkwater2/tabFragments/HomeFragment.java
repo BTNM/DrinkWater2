@@ -76,10 +76,12 @@ public class HomeFragment extends Fragment {
     }
 
     public void startAlarm () {
-        AlarmManager manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-        int interval = 100*60;
+        AlarmManager manager = (AlarmManager) getView().getContext().getSystemService(Context.ALARM_SERVICE);
+        int interval = 1000*6;
+        
+        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
 
-        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, System.currentTimeMillis(), interval, alarmIntent);
+        System.out.println("testing alarmTrigger2");
 //        Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
     }
 

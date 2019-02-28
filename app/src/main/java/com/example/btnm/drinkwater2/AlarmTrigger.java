@@ -13,6 +13,8 @@ public class AlarmTrigger extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context,"alarm are running", Toast.LENGTH_SHORT).show();
 
+        System.out.println("testing alarmTrigger1");
+
 
     }
 
