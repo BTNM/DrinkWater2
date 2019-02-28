@@ -1,4 +1,4 @@
-package com.example.btnm.drinkwater2;
+package com.example.btnm.drinkwater2.tabFragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.btnm.drinkwater2.R;
 
 public class SettingFragments extends Fragment {
     private static final String TAG = "Tab Setting";
