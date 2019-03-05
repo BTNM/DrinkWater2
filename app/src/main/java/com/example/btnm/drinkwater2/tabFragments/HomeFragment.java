@@ -2,6 +2,7 @@ package com.example.btnm.drinkwater2.tabFragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ public class HomeFragment extends Fragment {
 
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
+    BroadcastReceiver broadcastReceiver = null;
 
+    Button alarmTestBtn;
 
     @Nullable
     @Override
@@ -37,9 +40,8 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.tab_home,container, false);
 
 
-
-        Intent Intent = new Intent(getContext() , AlarmTrigger.class);
-        alarmIntent = PendingIntent.getBroadcast(getContext(), 0, Intent, 0);
+//        Intent Intent = new Intent(getContext() , AlarmTrigger.class);
+//        alarmIntent = PendingIntent.getBroadcast(getContext(), 0, Intent, 0);
 
 //        alarmIntent = PendingIntent.getService(getContext(),0,alarmIntentTest,0);
 
@@ -56,6 +58,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
+        alarmTestBtn.setOnClickListener((v) -> {
+//            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
+            startAlarm();
+        });
+
         // switch connected to user interface
         toggle10m = view.findViewById(R.id.switch10m);
         toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -65,6 +73,7 @@ public class HomeFragment extends Fragment {
                     // toogle enabled
 //                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
                     startAlarm();
+
                 } else {
                     Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
                 }
@@ -75,13 +84,52 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void startAlarm () {
-        AlarmManager manager = (AlarmManager) getView().getContext().getSystemService(Context.ALARM_SERVICE);
-        int interval = 1000*6;
-        
-        manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        System.out.println("testing alarmTrigger2");
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                startAlarm();
+            }
+        };
+
+
+    }
+
+    public void startAlarm () {
+        Context testContext = getActivity();
+        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//                getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
+        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+        int interval = 1000*2;
+
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
+
+        System.out.println("in startalarm context: "+getContext() + " getActivity: " + getActivity().getBaseContext() + " one more: " + getActivity().getApplication() );
+
+//        alarmManager = (AlarmManager) getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+//
+//        Intent Intent = new Intent(getContext().getApplicationContext(), AlarmTrigger.class);
+//        alarmIntent = PendingIntent.getBroadcast(getContext().getApplicationContext(), 0, Intent, 0);
+//        int interval = 1000*2;
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
+
+//
+//        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+//
+//        Intent Intent = new Intent(getContext() , AlarmTrigger.class);
+//        alarmIntent = PendingIntent.getBroadcast(getContext(), 0, Intent, 0);
+//        int interval = 1000*2;
+//
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
+//        alarmManager.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+100, alarmIntent);
+
+
+//        System.out.println("testing alarmTrigger2");
 //        Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
     }
 

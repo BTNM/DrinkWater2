@@ -21,13 +21,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
+
         //ViewPagers animates screen slides automatically, then add the different tabs/fragment to the viewpager
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
+
         //connect the vierpager to the tablelayout in the xml
         TabLayout tableLayout = (TabLayout) findViewById(R.id.allTabs);
         tableLayout.setupWithViewPager(mViewPager);
 
+        System.out.println(" app context 1: "+ getApplicationContext() );
 
 
     }
