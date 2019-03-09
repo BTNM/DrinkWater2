@@ -40,23 +40,59 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentView = inflater.inflate(R.layout.tab_home,container, false);
 
+//        alarmManager = (AlarmManager) fragmentView.getContext().getSystemService( Context.ALARM_SERVICE);
+//        Intent intent = new Intent(this.getContext().getApplicationContext() , AlarmTrigger.class);
+//        alarmIntent = PendingIntent.getBroadcast(this.getContext().getApplicationContext(), 0, intent, 0);
+//
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmIntent);
 
-//        Intent Intent = new Intent(getContext() , AlarmTrigger.class);
-//        alarmIntent = PendingIntent.getBroadcast(getContext(), 0, Intent, 0);
 
 //        alarmIntent = PendingIntent.getService(getContext(),0,alarmIntentTest,0);
 
 //        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
 
 
-//        btnTest = (Button) fragmentView.findViewById(R.id.btnTest);
-//        btnTest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        btnTest = (Button) fragmentView.findViewById(R.id.btnTest);
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alarmTestBtn = (Button) fragmentView.findViewById(R.id.alarmTestBtn);
+        alarmTestBtn.setOnClickListener((v) -> {
+//            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
+            startAlarm();
+
+        });
+
+        // switch connected to user interface
+        toggle10m = fragmentView.findViewById(R.id.switch10m);
+        toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // toogle enabled
+//                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
+                    ((MainActivity) getActivity()).startAlarmMain();
+
+                } else {
+                    Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+//        setupAlarms(fragmentView);
+
+        return fragmentView;
+    }
+
+//    private void setupAlarms(View fragmentView) {
+////        Intent intent = new Intent( getActivity().getApplicationContext(), AlarmTrigger.class);
+//        Intent intent = new Intent( getContext(), AlarmTrigger.class);
+//        alarmIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 //
 //        alarmTestBtn = (Button) fragmentView.findViewById(R.id.alarmTestBtn);
 //        alarmTestBtn.setOnClickListener((v) -> {
@@ -64,58 +100,18 @@ public class HomeFragment extends Fragment {
 //            startAlarm();
 //        });
 //
-//        // switch connected to user interface
-//        toggle10m = fragmentView.findViewById(R.id.switch10m);
-//        toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        btnTest = (Button) fragmentView.findViewById(R.id.btnTest);
+//        btnTest.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    // toogle enabled
-////                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
-//                    startAlarm();
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
 //
-//                } else {
-//                    Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-//                }
 //            }
 //        });
+//
+//
+//    }
 
-        setupAlarms(fragmentView);
-
-        return fragmentView;
-    }
-
-    private void setupAlarms(View fragmentView) {
-        Intent intent = new Intent( getActivity().getApplicationContext(), AlarmTrigger.class);
-        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-
-        alarmTestBtn = (Button) fragmentView.findViewById(R.id.alarmTestBtn);
-        alarmTestBtn.setOnClickListener((v) -> {
-//            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
-            setAlarms();
-        });
-
-        btnTest = (Button) fragmentView.findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
-                stopAlarms();
-            }
-        });
-
-
-
-
-
-    }
-
-    private void stopAlarms() {
-    }
-
-    private void setAlarms() {
-        startAlarm();
-    }
 
 //    @Override
 //    public void onResume() {
@@ -134,22 +130,26 @@ public class HomeFragment extends Fragment {
 
 
     public void startAlarm () {
+        alarmManager = (AlarmManager) fragmentView.getContext().getSystemService( Context.ALARM_SERVICE);
+        Intent intent = new Intent(this.getContext().getApplicationContext() , AlarmTrigger.class);
+        alarmIntent = PendingIntent.getBroadcast(this.getContext().getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmIntent);
 
-        alarmManager = (AlarmManager) (getActivity().getSystemService(Context.ALARM_SERVICE) );
-////                getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+//        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE) ;
+//////                getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+////
+////        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
+////        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
 //
-//        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
-//        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-
-        // Millisec * Second * Minutes
-        int interval = 1000*3;
-
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
-//        alarmManager.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis()+interval, alarmIntent);
-
-
-        System.out.println("in startalarm context: "+getContext() + " getActivity: " + getActivity().getBaseContext() + " one more: " + getActivity().getApplication() );
+//        // Millisec * Second * Minutes
+//        int interval = 1000*3;
+//
+//        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, alarmIntent);
+////        alarmManager.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis()+interval, alarmIntent);
+//
+//
+//        System.out.println("in startalarm context: "+getContext() + " getActivity: " + getActivity().getBaseContext() + " one more: " + getActivity().getApplication() );
 
 //        alarmManager = (AlarmManager) getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
 //

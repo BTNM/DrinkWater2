@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.tabFragments.AlarmsFragment;
 import com.example.btnm.drinkwater2.tabFragments.HomeFragment;
@@ -45,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new SettingFragments(),"Setting");
 
         viewPager.setAdapter(adapter);
+    }
+
+    public void startAlarmMain () {
+        Toast.makeText(this,"alarm are running2", Toast.LENGTH_LONG).show();
+
     }
 
 }

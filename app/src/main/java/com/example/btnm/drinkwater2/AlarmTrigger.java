@@ -1,5 +1,7 @@
 package com.example.btnm.drinkwater2;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,10 @@ public class AlarmTrigger extends BroadcastReceiver {
         Log.d("Alarm USer Notice", "TRIGGERED");
         Toast.makeText(context,"alarm are running", Toast.LENGTH_LONG).show();
 
+//        Intent notificationIntent = new Intent(context, AlarmTrigger.class);
+//        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
 
     }
