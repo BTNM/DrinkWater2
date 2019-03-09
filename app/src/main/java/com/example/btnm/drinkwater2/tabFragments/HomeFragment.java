@@ -28,6 +28,7 @@ public class HomeFragment extends Fragment {
     private Button btnTest;
     Switch toggle10m;
 
+    View fragmentView;
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
     BroadcastReceiver broadcastReceiver = null;
@@ -37,7 +38,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_home,container, false);
+        fragmentView = inflater.inflate(R.layout.tab_home,container, false);
 
 
 //        Intent Intent = new Intent(getContext() , AlarmTrigger.class);
@@ -49,65 +50,104 @@ public class HomeFragment extends Fragment {
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
 
 
+//        btnTest = (Button) fragmentView.findViewById(R.id.btnTest);
+//        btnTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        alarmTestBtn = (Button) fragmentView.findViewById(R.id.alarmTestBtn);
+//        alarmTestBtn.setOnClickListener((v) -> {
+////            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
+//            startAlarm();
+//        });
+//
+//        // switch connected to user interface
+//        toggle10m = fragmentView.findViewById(R.id.switch10m);
+//        toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    // toogle enabled
+////                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
+//                    startAlarm();
+//
+//                } else {
+//                    Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
-        btnTest = (Button) view.findViewById(R.id.btnTest);
+        setupAlarms(fragmentView);
+
+        return fragmentView;
+    }
+
+    private void setupAlarms(View fragmentView) {
+        Intent intent = new Intent( getActivity().getApplicationContext(), AlarmTrigger.class);
+        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+
+        alarmTestBtn = (Button) fragmentView.findViewById(R.id.alarmTestBtn);
+        alarmTestBtn.setOnClickListener((v) -> {
+//            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
+            setAlarms();
+        });
+
+        btnTest = (Button) fragmentView.findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
-        alarmTestBtn.setOnClickListener((v) -> {
-//            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
-            startAlarm();
-        });
-
-        // switch connected to user interface
-        toggle10m = view.findViewById(R.id.switch10m);
-        toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // toogle enabled
-//                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
-                    startAlarm();
-
-                } else {
-                    Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-                }
+//                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
+                stopAlarms();
             }
         });
 
 
-        return view;
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                startAlarm();
-            }
-        };
 
 
     }
+
+    private void stopAlarms() {
+    }
+
+    private void setAlarms() {
+        startAlarm();
+    }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//
+//        broadcastReceiver = new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                startAlarm();
+//            }
+//        };
+//
+//
+//    }
+
+
 
     public void startAlarm () {
-        Context testContext = getActivity();
-        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//                getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
-        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
-        int interval = 1000*2;
+
+        alarmManager = (AlarmManager) (getActivity().getSystemService(Context.ALARM_SERVICE) );
+////                getActivity().getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+//
+//        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
+//        alarmIntent = PendingIntent.getBroadcast(getActivity(), 0, intent, 0);
+
+        // Millisec * Second * Minutes
+        int interval = 1000*3;
 
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), interval, alarmIntent);
+//        alarmManager.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis()+interval, alarmIntent);
+
 
         System.out.println("in startalarm context: "+getContext() + " getActivity: " + getActivity().getBaseContext() + " one more: " + getActivity().getApplication() );
 
