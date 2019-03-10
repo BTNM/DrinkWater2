@@ -86,10 +86,12 @@ public class HomeFragment extends Fragment {
 
         alarmPendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
 
-//        Millisec * Second * Minutes
+//        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
         int interval = 1000*60;
 
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
+
+//        Toast.makeText(getContext(),"check time: "+ System.currentTimeMillis(), Toast.LENGTH_LONG).show();
 
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);

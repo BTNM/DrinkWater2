@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tableLayout.setupWithViewPager(mViewPager);
 
         System.out.println(" app context 1: "+ getApplicationContext() );
-
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
 
     }
 
