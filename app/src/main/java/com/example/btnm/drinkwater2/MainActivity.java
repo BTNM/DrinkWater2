@@ -1,5 +1,10 @@
 package com.example.btnm.drinkwater2;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -21,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
@@ -48,9 +54,20 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    public void startAlarmMain () {
-        Toast.makeText(this,"alarm are running2", Toast.LENGTH_LONG).show();
-
-    }
+//    public void startAlarmFromMain() {
+////        Toast.makeText(this,"alarm are running2", Toast.LENGTH_LONG).show();
+//
+//        AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
+////        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(MainActivity.this, AlarmTrigger.class);
+////        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
+//        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+//
+////        Millisec * Second * Minutes
+//        int interval = 1000*10;
+//
+//
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
+//    }
 
 }
