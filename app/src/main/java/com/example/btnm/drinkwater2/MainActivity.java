@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //        AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
 ////        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(MainActivity.this, AlarmTrigger.class);
-////        Intent intent = new Intent(getActivity(), AlarmTrigger.class);
+//        Intent intent = new Intent(MainActivity.this, NotificationReceiver.class);
+////        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
 //        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 //
 ////        Millisec * Second * Minutes
