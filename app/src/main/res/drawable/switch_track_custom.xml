@@ -3,19 +3,18 @@
 
     <item android:state_checked="true">
         <shape android:shape="rectangle">
-            <size android:height="36dp" />
-            <solid android:color="#34D190"/>
+            <size android:height="32dp" />
+            <!--<solid android:color="#34D190"/>-->
             <corners android:radius="24dp"/>
             <stroke
-                android:width="5dp"
-                android:color="#777" />
+                android:width="2dp"
+                android:color="#34D190" />
         </shape>
     </item>
 
     <item android:state_checked="false">
         <shape android:shape="rectangle">
-            <size android:height="36dp" />
-
+            <size android:height="32dp" />
             <corners android:radius="24dp"/>
             <stroke
                 android:width="2dp"
