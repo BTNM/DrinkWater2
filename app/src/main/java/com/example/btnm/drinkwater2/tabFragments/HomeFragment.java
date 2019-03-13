@@ -100,21 +100,19 @@ public class HomeFragment extends Fragment {
 
     public void startAlarm () {
         alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
-//        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-
         Intent intent = new Intent(getContext() , NotificationReceiver.class);
+//        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 //        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-
         alarmPendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
 
+        int minutes = 1;
 //        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
-        int interval = 1000*60;
+        int interval = 1000*60*minutes;
 
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
 
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
-//        alarmManager.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()+100, alarmPendingIntent);
 
     }
 

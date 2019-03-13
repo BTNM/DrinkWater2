@@ -29,12 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        getSupportActionBar().hide();
-
-
-
-
-
         mSectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager());
 
         //ViewPagers animates screen slides automatically, then add the different tabs/fragment to the viewpager
@@ -46,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         tableLayout.setupWithViewPager(mViewPager);
 
         System.out.println(" app context 1: "+ getApplicationContext() );
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
+
+
 
     }
 
@@ -59,21 +54,5 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
     }
-
-//    public void startAlarmFromMain() {
-////        Toast.makeText(this,"alarm are running2", Toast.LENGTH_LONG).show();
-//
-//        AlarmManager alarmManager = (AlarmManager) getSystemService( Context.ALARM_SERVICE);
-////        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(MainActivity.this, NotificationReceiver.class);
-////        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-//        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//
-////        Millisec * Second * Minutes
-//        int interval = 1000*10;
-//
-//
-//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
-//    }
 
 }
