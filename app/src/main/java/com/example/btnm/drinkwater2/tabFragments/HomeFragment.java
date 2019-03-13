@@ -13,13 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
-
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
