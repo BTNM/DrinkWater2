@@ -21,6 +21,9 @@ import android.widget.Toast;
 import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
@@ -29,7 +32,8 @@ public class HomeFragment extends Fragment {
     Switch toggle10m;
 
     private AlarmManager alarmManager;
-    private PendingIntent alarmPendingIntent;
+    private PendingIntent tempAlarmPendingIntent;
+    private Map<String, PendingIntent> alarmMap;
 
 
     @Nullable
@@ -37,6 +41,23 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home,container, false);
 
+
+
+
+        setupAlarmSwitches(view);
+
+
+        return view;
+    }
+
+    public void setupAlarmList() {
+        alarmMap = new LinkedHashMap();
+
+
+
+    }
+
+    private void setupAlarmSwitches(View view) {
 
         btnTest = (Button) view.findViewById(R.id.btnTest);
         btnTest.setOnClickListener(new View.OnClickListener() {
@@ -53,25 +74,18 @@ public class HomeFragment extends Fragment {
 
         });
 
-        setupAlarmSwitches(view);
-
-
-        return view;
-    }
-
-
-    private void setupAlarmSwitches(View view) {
         // switch connected to user interface
-        toggle10m = view.findViewById(R.id.switch10m);
+        toggle10m = view.findViewById(R.id.switch15m);
         toggle10m.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // toogle enabled
             if (isChecked) {
-                startAlarm();
 //                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
-//                    ((MainActivity) getActivity()).startAlarmFromMain();
+                tempAlarmPendingIntent = startAlarm();
+                System.out.println("alarm pendingintent: "+tempAlarmPendingIntent.toString());
+//                alarmMap.put("",tempAlarmPendingIntent);
             } else {
                 Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-                alarmManager.cancel(alarmPendingIntent);
+//                alarmManager.cancel(alarmPendingIntent);
             }
         } );
 
@@ -98,12 +112,12 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void startAlarm () {
+    public PendingIntent startAlarm () {
         alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext() , NotificationReceiver.class);
 //        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 //        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-        alarmPendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
 
         int minutes = 1;
 //        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
@@ -111,6 +125,7 @@ public class HomeFragment extends Fragment {
 
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
 
+        return alarmPendingIntent;
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
 

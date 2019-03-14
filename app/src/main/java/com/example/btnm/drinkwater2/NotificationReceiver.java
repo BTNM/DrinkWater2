@@ -38,15 +38,29 @@ public class NotificationReceiver extends BroadcastReceiver {
 //        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 //        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"DrinkWater::MyWakelockTag" );
 //        wakeLock.acquire();
-        // code here for power manager
-
+////         code here for power manager
+//
+//
 //        Intent startAutoSyncService = new Intent(context, NotificationReceiver.class);
 //        context.startService(startAutoSyncService);
 //
 //        wakeLock.release();
 
+        turnScreenOn(context);
         setupNotification(context);
+        
+    }
 
+    public void turnScreenOn(Context context) {
+        // uses power manager to turn on illumination for an instant before releasing to save battery life, usually for notification
+        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        WakeLock wakeLock = powerManager.newWakeLock( PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
+
+        if (wakeLock != null) {
+            wakeLock.acquire();
+        }
+
+        wakeLock.release();
     }
 
     private void setupNotification(Context context) {
