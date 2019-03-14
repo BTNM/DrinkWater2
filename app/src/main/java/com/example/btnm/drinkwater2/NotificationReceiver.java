@@ -48,7 +48,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         turnScreenOn(context);
         setupNotification(context);
-        
+
     }
 
     public void turnScreenOn(Context context) {

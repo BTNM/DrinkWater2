@@ -9,11 +9,9 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -27,20 +25,22 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
-    private Button btnTest;
-    Button alarmTestBtn;
-    Switch toggle10m;
-
     private AlarmManager alarmManager;
     private PendingIntent tempAlarmPendingIntent;
     private Map<String, PendingIntent> alarmMap;
 
+    private Button alarmTestBtn;
+    private Switch toggle15m;
+    private Switch toggle30m;
+    private Switch toggle45m;
+    private Switch toggle1h;
+    private Switch toggle1_5h;
+    private Switch toggle2h;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home,container, false);
-
 
 
 
@@ -59,14 +59,6 @@ public class HomeFragment extends Fragment {
 
     private void setupAlarmSwitches(View view) {
 
-        btnTest = (Button) view.findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Testing home button click 1", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
         alarmTestBtn.setOnClickListener((v) -> {
 //            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
@@ -75,8 +67,8 @@ public class HomeFragment extends Fragment {
         });
 
         // switch connected to user interface
-        toggle10m = view.findViewById(R.id.switch15m);
-        toggle10m.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        toggle15m = view.findViewById(R.id.switch15m);
+        toggle15m.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // toogle enabled
             if (isChecked) {
 //                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
@@ -88,25 +80,50 @@ public class HomeFragment extends Fragment {
 //                alarmManager.cancel(alarmPendingIntent);
             }
         } );
+        toggle30m = view.findViewById(R.id.switch30m);
+        toggle30m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
+            if (isChecked) {
 
-//        toggle10m = view.findViewById(R.id.switch10m);
-//        toggle10m.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if (isChecked) {
-//                    // toogle enabled
-////                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
-////                    ((MainActivity) getActivity()).startAlarmFromMain();
-//                    startAlarm();
-//
-//                } else {
-//                    Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-//                    alarmManager.cancel(alarmPendingIntent);
-//                }
-//            }
-//        });
+            } else {
 
+            }
+        }));
 
+        toggle45m = view.findViewById(R.id.switch45m);
+        toggle45m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
+            if (isChecked) {
+
+            } else {
+
+            }
+        }));
+
+        toggle1h = view.findViewById(R.id.switch1h);
+        toggle1h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
+            if (isChecked) {
+
+            } else {
+
+            }
+        }));
+
+        toggle1_5h = view.findViewById(R.id.switch1_5h);
+        toggle1_5h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
+            if (isChecked) {
+
+            } else {
+
+            }
+        }));
+        
+        toggle2h= view.findViewById(R.id.switch2h);
+        toggle2h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
+            if (isChecked) {
+
+            } else {
+
+            }
+        }));
 
 
     }
