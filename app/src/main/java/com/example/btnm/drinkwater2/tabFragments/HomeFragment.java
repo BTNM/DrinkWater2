@@ -20,14 +20,20 @@ import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
     private AlarmManager alarmManager;
-    private PendingIntent tempAlarmPendingIntent;
-    private Map<String, PendingIntent> alarmMap;
+//    private PendingIntent tempAlarmPendingIntent;
+    private Map<Integer, PendingIntent> alarmMap;
+    private LinkedList<PendingIntent> alarmLinkedList = new LinkedList<>();
+
+    int tempIndex;
+
+    private int alarmNumber = 0;
 
     private Button alarmTestBtn;
     private Switch toggle15m;
@@ -51,98 +57,169 @@ public class HomeFragment extends Fragment {
     }
 
     public void setupAlarmList() {
-        alarmMap = new LinkedHashMap();
+//        alarmMap = new LinkedHashMap();
+
 
 
 
     }
 
     private void setupAlarmSwitches(View view) {
+        Intent intent = new Intent(getContext() , NotificationReceiver.class);
+        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
 
-        alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
-        alarmTestBtn.setOnClickListener((v) -> {
-//            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHORT).show();
-            startAlarm();
-
-        });
+//        alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
+//        alarmTestBtn.setOnClickListener((v) -> {
+////            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHO/RT).show();
+////            startAlarm();
+//
+//        });
 
         // switch connected to user interface
         toggle15m = view.findViewById(R.id.switch15m);
         toggle15m.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
             // toogle enabled
             if (isChecked) {
-//                    Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
-                tempAlarmPendingIntent = startAlarm();
-                System.out.println("alarm pendingintent: "+tempAlarmPendingIntent.toString());
+                checkSwitches(toggle15m);
+
+//                Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
+                startAlarm();
+//                startAlarm("Switch 10m On");
+//                System.out.println("alarm pendingintent: "+tempAlarmPendingIntent.toString());
 //                alarmMap.put("",tempAlarmPendingIntent);
             } else {
-                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-//                alarmManager.cancel(alarmPendingIntent);
+//                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
+                alarmManager.cancel(cancelPendingIntent );
             }
         } );
         toggle30m = view.findViewById(R.id.switch30m);
         toggle30m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-
+                checkSwitches(toggle30m);
+//                Toast.makeText(getActivity(), "Switch 30m On", Toast.LENGTH_SHORT).show();
+                startAlarm();
+//                startAlarm("Switch 30m On");
             } else {
-
+                alarmManager.cancel(cancelPendingIntent );
             }
         }));
 
         toggle45m = view.findViewById(R.id.switch45m);
         toggle45m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-
+                checkSwitches(toggle45m);
+                startAlarm();
             } else {
-
+                alarmManager.cancel(cancelPendingIntent );
             }
         }));
 
         toggle1h = view.findViewById(R.id.switch1h);
         toggle1h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-
+                checkSwitches(toggle1h);
+                startAlarm();
             } else {
-
+                alarmManager.cancel(cancelPendingIntent );
             }
         }));
 
         toggle1_5h = view.findViewById(R.id.switch1_5h);
         toggle1_5h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-
+                checkSwitches(toggle1_5h);
+                startAlarm();
             } else {
-
+                alarmManager.cancel(cancelPendingIntent );
             }
         }));
         
         toggle2h= view.findViewById(R.id.switch2h);
         toggle2h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-
+                checkSwitches(toggle2h);
+                startAlarm();
             } else {
-
+                alarmManager.cancel(cancelPendingIntent );
             }
         }));
 
 
     }
 
+    public void checkSwitches (Switch toggleSwitch) {
+//        boolean toggle = toggleSwitch.isChecked();
 
-    public PendingIntent startAlarm () {
+        if (toggle15m == toggleSwitch) {
+            toggle30m.setChecked(false);
+            toggle45m.setChecked(false);
+            toggle1h.setChecked(false);
+            toggle1_5h.setChecked(false);
+            toggle2h.setChecked(false);
+        }
+        if (toggle30m == toggleSwitch) {
+            toggle15m.setChecked(false);
+            toggle45m.setChecked(false);
+            toggle1h.setChecked(false);
+            toggle1_5h.setChecked(false);
+            toggle2h.setChecked(false);
+        }
+        if (toggle45m == toggleSwitch) {
+            toggle15m.setChecked(false);
+            toggle30m.setChecked(false);
+            toggle1h.setChecked(false);
+            toggle1_5h.setChecked(false);
+            toggle2h.setChecked(false);
+        }
+        if (toggle1h == toggleSwitch) {
+            toggle15m.setChecked(false);
+            toggle30m.setChecked(false);
+            toggle45m.setChecked(false);
+            toggle1_5h.setChecked(false);
+            toggle2h.setChecked(false);
+        }
+        if (toggle1_5h == toggleSwitch) {
+            toggle15m.setChecked(false);
+            toggle30m.setChecked(false);
+            toggle45m.setChecked(false);
+            toggle1h.setChecked(false);
+            toggle2h.setChecked(false);
+        }
+        if (toggle2h == toggleSwitch) {
+            toggle15m.setChecked(false);
+            toggle30m.setChecked(false);
+            toggle45m.setChecked(false);
+            toggle1h.setChecked(false);
+            toggle1_5h.setChecked(false);
+        }
+
+    }
+
+
+    public void startAlarm () {
+//        alarmNumber++;
+//        System.out.println(testTxt);
         alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
         Intent intent = new Intent(getContext() , NotificationReceiver.class);
+
 //        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 //        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, 0);
 
-        int minutes = 1;
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
+
+        alarmLinkedList.add(alarmPendingIntent);
+//        alarmMap.put(alarmNumber,alarmPendingIntent);
+
 //        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
+        int minutes = 1;
         int interval = 1000*60*minutes;
 
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
 
-        return alarmPendingIntent;
+        alarmLinkedList.indexOf(alarmPendingIntent);
+
+
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
 //        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
 
