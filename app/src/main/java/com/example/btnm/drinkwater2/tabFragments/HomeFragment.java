@@ -49,7 +49,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.tab_home,container, false);
 
 
-
         setupAlarmSwitches(view);
 
 

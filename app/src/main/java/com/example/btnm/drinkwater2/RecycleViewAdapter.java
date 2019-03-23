@@ -14,23 +14,24 @@ import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
-    private List<Data> listData = new ArrayList<Data>();
+    private List<AlarmItem> listData = new ArrayList<AlarmItem>();
 
     public static class RecycleViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView txtDescription;
+        public TextView txtDescription1;
+        public TextView txtDescription2;
 
         public RecycleViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            txtDescription = (TextView) itemView.findViewById(R.id.txtDescription);
-
+            txtDescription1 = (TextView) itemView.findViewById(R.id.textView1);
+            txtDescription2 = (TextView) itemView.findViewById(R.id.textView2);
 
         }
     }
 
-    public RecycleViewAdapter(List<Data> listData) {
+    public RecycleViewAdapter(List<AlarmItem> listData) {
         this.listData = listData;
 
     }
@@ -50,10 +51,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder recycleViewHolder, int i) {
         // on each alarm element take image and txt
-        Data dataItem = listData.get(i);
+        AlarmItem dataItem = listData.get(i);
 
         recycleViewHolder.imageView.setImageResource(listData.get(i).getImageID() );
-        recycleViewHolder.txtDescription.setText(listData.get(i).getDescription() );
+        recycleViewHolder.txtDescription1.setText(listData.get(i).getDescription1() );
+        recycleViewHolder.txtDescription2.setText(listData.get(i).getDescription2() );
 
     }
 

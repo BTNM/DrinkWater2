@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.btnm.drinkwater2.Data;
+import com.example.btnm.drinkwater2.AlarmItem;
 import com.example.btnm.drinkwater2.R;
 import com.example.btnm.drinkwater2.RecycleViewAdapter;
 
@@ -27,7 +27,7 @@ public class AlarmsFragment extends Fragment {
     private RecycleViewAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private List<Data> listData = new ArrayList<Data>();
+    private List<AlarmItem> listData = new ArrayList<AlarmItem>();
 
     private FloatingActionButton floatingButton;
     private Button btnTest;
@@ -37,12 +37,19 @@ public class AlarmsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_alarms,container, false);
 
+        // create adapter and layout manager, and set data list to the adapter, before setting recycle view to the adapater and layout manager
         initData();
         recyclerView = (RecyclerView)  view.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext() );
-        adapter = new RecycleViewAdapter(listData);
+
+//        adapter = new RecycleViewAdapter(initData() );
+        adapter = new RecycleViewAdapter(listData );
+
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+
 
 
         btnTest = (Button) view.findViewById(R.id.btnTest);
@@ -58,15 +65,35 @@ public class AlarmsFragment extends Fragment {
         return view;
     }
 
-    private void initData() {
-        listData.add(new Data(R.drawable.water_drop_icon,"WaterDrop") );
-        listData.add(new Data(R.drawable.water_droplet2,"WaterDrop2 for testing" ) );
-        listData.add(new Data(R.drawable.cartoon_water_drops,"WaterDrop3" ) );
-        //
-        listData.add(new Data(R.drawable.water_drop_icon,"WaterDrop") );
-        listData.add(new Data(R.drawable.water_droplet2,"WaterDrop2") );
-        listData.add(new Data(R.drawable.cartoon_water_drops,"WaterDrop3") );
+//    private ArrayList<AlarmItem> initData() {
+//
+//        ArrayList<AlarmItem> testList = new ArrayList<>();
+//
+//        testList.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop") );
+//        testList.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing" ) );
+//        testList.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ) );
+//
+//        return testList;
+//
+//    }
 
+    private void initData() {
+
+        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"," Line 1" ));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ," Line 1"));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon" ," Line 1"));
+
+        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
+        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );
+        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
+
+        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
+        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing" ," Line 1") );
+        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
+
+        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"," Line 1" ));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ," Line 1"));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon" ," Line 1"));
 
     }
 
