@@ -16,6 +16,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
 
+    // takes the info from view in xml into the recycleview
     public static class RecycleViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         public TextView txtDescription1;
@@ -51,7 +52,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder recycleViewHolder, int i) {
         // on each alarm element take image and txt
-        AlarmItem dataItem = listData.get(i);
+//        AlarmItem dataItem = listData.get(i);
 
         recycleViewHolder.imageView.setImageResource(listData.get(i).getImageID() );
         recycleViewHolder.txtDescription1.setText(listData.get(i).getDescription1() );
