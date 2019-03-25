@@ -1,5 +1,6 @@
 package com.example.btnm.drinkwater2.tabFragments;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.AlarmItem;
@@ -64,7 +66,10 @@ public class AlarmsFragment extends Fragment {
             }
         });
 
-
+        floatingButton.setOnClickListener( (e) -> {
+            Intent intent = new Intent(getContext(), AddAlarmActivity.class);
+            startActivity(intent);
+        } );
 
         return view;
     }
@@ -83,21 +88,33 @@ public class AlarmsFragment extends Fragment {
 
     private void initData() {
 
-        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"," Line 1" ));
-        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ," Line 1"));
-        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon" ," Line 1"));
+        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
 
-        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
-        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );
-        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
+        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
 
-        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
-        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing" ," Line 1") );
-        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
+        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
 
-        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"," Line 1" ));
-        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ," Line 1"));
-        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon" ," Line 1"));
+        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
+
+//        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
+//        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );
+//        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
+//
+//        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
+//        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing" ," Line 1") );
+//        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
+
+//        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"," Line 1" ));
+//        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ," Line 1"));
+//        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon" ," Line 1"));
 
     }
 

@@ -1,17 +1,31 @@
 package com.example.btnm.drinkwater2;
 
+import android.widget.Switch;
+
 public class AlarmItem {
     private int imageID;
-    private String description1;
-    private String description2;
+    private String repeatingAlarmTime;
+    private Switch activeSwitch;
 
-    public AlarmItem() {
+//    private String description1;
+//    private String description2;
+//
+//    public AlarmItem(int imageID, String description1, String description2) {
+//        this.imageID = imageID;
+//        this.description1 = description1;
+//        this.description2 = description2;
+//    }
+
+
+    public AlarmItem(int imageID, String repeatingAlarmTime) {
+        this.imageID = imageID;
+        this.repeatingAlarmTime = repeatingAlarmTime;
     }
 
-    public AlarmItem(int imageID, String description1, String description2) {
+    public AlarmItem(int imageID, String repeatingAlarmTime, Switch activeSwitch) {
         this.imageID = imageID;
-        this.description1 = description1;
-        this.description2 = description2;
+        this.repeatingAlarmTime = repeatingAlarmTime;
+        this.activeSwitch = activeSwitch;
     }
 
     public int getImageID() {
@@ -22,20 +36,36 @@ public class AlarmItem {
         this.imageID = imageID;
     }
 
-    public String getDescription1() {
-        return description1;
+    public String getRepeatingAlarmTime() {
+        return repeatingAlarmTime;
     }
 
-    public void setDescription1(String description) {
-        this.description1 = description;
+    public void setRepeatingAlarmTime(String repeatingAlarmTime) {
+        this.repeatingAlarmTime = repeatingAlarmTime;
     }
 
-    public String getDescription2() {
-        return description2;
+    public Switch getActiveSwitch() {
+        return activeSwitch;
     }
 
-    public void setDescription2(String description2) {
-        this.description2 = description2;
+    public void setActiveSwitch(Switch activeSwitch) {
+        this.activeSwitch = activeSwitch;
     }
+
+//    public String getDescription1() {
+//        return description1;
+//    }
+//
+//    public void setDescription1(String description) {
+//        this.description1 = description;
+//    }
+//
+//    public String getDescription2() {
+//        return description2;
+//    }
+//
+//    public void setDescription2(String description2) {
+//        this.description2 = description2;
+//    }
 
 }
