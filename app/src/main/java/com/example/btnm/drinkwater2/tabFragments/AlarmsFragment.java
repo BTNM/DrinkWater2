@@ -65,7 +65,7 @@ public class AlarmsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Testing alarmlist button click 2", Toast.LENGTH_SHORT).show();
             }
         });
-
+        floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
         floatingButton.setOnClickListener( (e) -> {
             Intent intent = new Intent(getContext(), AddAlarmActivity.class);
             startActivity(intent);

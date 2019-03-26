@@ -21,6 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".tabFragments.AddAlarmActivity"
+            android:label="Add Alarm Activity"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <receiver android:name=".NotificationReceiver" />
     </application>
 
