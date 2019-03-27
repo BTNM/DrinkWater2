@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ECECECEC"
+    >
 
     <LinearLayout
         android:id="@+id/topBtnLayout"
@@ -22,18 +24,20 @@
             android:layout_height="match_parent"
             android:background="#E0E0E0"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:text="Cancel"
-            android:textSize="24dp" />
+            android:textSize="34dp" />
 
         <Button
             android:id="@+id/saveBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="#E0E0E0"
+            android:fontFamily="casual"
             android:layout_weight="1"
             android:padding="0dp"
             android:text="Save"
-            android:textSize="24dp" />
+            android:textSize="34dp" />
 
     </LinearLayout>
 
@@ -44,14 +48,35 @@
         android:layout_margin="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topBtnLayout"
-        app:layout_constraintVertical_bias="0.507">
+        app:layout_constraintTop_toBottomOf="@+id/topBtnLayout">
 
     </Spinner>
 
+    <EditText
+        android:id="@+id/inputAlarmTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.221"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconChooseSpinner"
+        app:layout_constraintVertical_bias="0.483" />
+
+    <ImageView
+        android:id="@+id/testImage"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBtnLayout" />
 
 
 </android.support.constraint.ConstraintLayout>
