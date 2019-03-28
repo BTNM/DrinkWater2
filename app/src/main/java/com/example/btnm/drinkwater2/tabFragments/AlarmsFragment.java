@@ -1,7 +1,6 @@
 package com.example.btnm.drinkwater2.tabFragments;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.AlarmItem;
@@ -26,12 +24,17 @@ import java.util.List;
 
 public class AlarmsFragment extends Fragment {
     private static final String TAG = "Tab AlarmList";
+    public static final int REQUEST_CODE_ALARMDATA = 101;
 
     private RecyclerView recyclerView;
     private RecycleViewAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
+
+    private int iconPosition;
+    private int hourDuration;
+    private int minuteDuration;
 
     private FloatingActionButton floatingButton;
     private Button btnTest;
@@ -43,6 +46,57 @@ public class AlarmsFragment extends Fragment {
 
         // create adapter and layout manager, and set data list to the adapter, before setting recycle view to the adapater and layout manager
         initData();
+        initRecycleView(view);
+
+//        btnTest = (Button) view.findViewById(R.id.btnTest);
+//        btnTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "Testing alarmlist button click 2", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        floatingButton.setOnClickListener( (e) -> {
+            Intent intent = new Intent(getContext(), AddAlarmActivity.class);
+//            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_ALARMDATA);
+        } );
+
+
+
+
+        return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_ALARMDATA) {
+            if (resultCode == AddAlarmActivity.RESULT_OK) {
+                //get the data from the addAlarmActivity, by using the same name keys used in the intent
+                String iconPos = data.getStringExtra(AddAlarmActivity.ICONPOS);
+                String hourDur = data.getStringExtra(AddAlarmActivity.HOURDUR);
+                String minuteDur = data.getStringExtra(AddAlarmActivity.MINUTEDUR);
+
+                System.out.println("icon value: "+ iconPos  + " hour value: "+ hourDur + " minute: "+minuteDur);
+                Toast.makeText(getContext() , "testing reply"+iconPos + hourDur + minuteDur, Toast.LENGTH_SHORT).show();
+
+                iconPosition = Integer.parseInt(iconPos);
+                hourDuration = Integer.parseInt(hourDur);
+                minuteDuration = Integer.parseInt(minuteDur);
+
+                listData.add(new AlarmItem(2131230831,"testIcon"));
+
+//                listData.notify();
+                adapter.notifyDataSetChanged();
+
+            }
+
+        }
+
+
+    }
+
+    private void initRecycleView(View view) {
         recyclerView = (RecyclerView)  view.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext() );
@@ -56,35 +110,8 @@ public class AlarmsFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-
-        btnTest = (Button) view.findViewById(R.id.btnTest);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Testing alarmlist button click 2", Toast.LENGTH_SHORT).show();
-            }
-        });
-        floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
-        floatingButton.setOnClickListener( (e) -> {
-            Intent intent = new Intent(getContext(), AddAlarmActivity.class);
-            startActivity(intent);
-        } );
-
-        return view;
     }
 
-//    private ArrayList<AlarmItem> initData() {
-//
-//        ArrayList<AlarmItem> testList = new ArrayList<>();
-//
-//        testList.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop") );
-//        testList.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing" ) );
-//        testList.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ) );
-//
-//        return testList;
-//
-//    }
 
     private void initData() {
 
@@ -96,25 +123,11 @@ public class AlarmsFragment extends Fragment {
         listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
         listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
 
-        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
-        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
-        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
-
-        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
-        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
-        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
+        
 
 //        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
 //        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );
 //        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
-//
-//        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
-//        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing" ," Line 1") );
-//        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
-
-//        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"," Line 1" ));
-//        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ," Line 1"));
-//        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon" ," Line 1"));
 
     }
 
