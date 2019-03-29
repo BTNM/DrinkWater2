@@ -57,22 +57,10 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private void setupButtons() {
-        EditText inputAlarm = (EditText)  findViewById(R.id.inputAlarmTime);
+//        EditText inputAlarm = (EditText)  findViewById(R.id.inputAlarmTime);
+
         saveBtn = (Button) findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener((e) -> {
-
-//            if ( inputAlarm.getText().toString().trim().isEmpty() || Integer.parseInt(inputAlarm.getText().toString()) > 1 ) {
-//
-////                alarmDuration = (int) Integer.valueOf(inputAlarm.getText().toString() );
-////                Toast.makeText(getBaseContext(), "Test editText for now: "+alarmDuration + "test2 : "+ inputAlarm.getText().toString(),Toast.LENGTH_SHORT).show();
-////                System.out.println(alarmDuration2);
-//
-//                tempImage.setImageResource(imageIconData[spinner2.getSelectedItemPosition()] );
-//
-////                testIconCheck.setImageResource(spinner2.getSelectedView());
-////                testIconCheck.setImageResource(R.drawable.ic_audio);
-////                testIconCheck.setImageResource(imageIconData[spinner2.getSelectedItemPosition()] );
-//            }
 
             // extract icon and time data for the new alarm item
             // gather all data as Strings to be passed back to alarmFragment to create new alarm item
@@ -84,6 +72,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 
             finish();
         });
+
         cancelBtn = (Button) findViewById(R.id.cancelBtn);
         cancelBtn.setOnClickListener( (e) -> {
             finish();
@@ -91,6 +80,8 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private void setupImageSpinner() {
+        //setup icon spinner with images
+
         spinner = (Spinner) findViewById(R.id.iconChooseSpinner);
 
         SimpleImageArrayAdapter simpleImageArrayAdapter = new SimpleImageArrayAdapter(getBaseContext(), imageIconData);
@@ -113,6 +104,8 @@ public class AddAlarmActivity extends AppCompatActivity {
     }
 
     private void setupHourMinutePicker() {
+        // setup number picker for the time of the alarm
+        
         minutePicker = (NumberPicker) findViewById(R.id.minutePicker);
         minutePicker.setMinValue(0);
         minutePicker.setMaxValue(60);

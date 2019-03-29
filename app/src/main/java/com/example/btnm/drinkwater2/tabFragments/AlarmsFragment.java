@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class AlarmsFragment extends Fragment {
     private int minuteDuration;
 
     private FloatingActionButton floatingButton;
-    private Button btnTest;
 
     @Nullable
     @Override
@@ -48,13 +48,8 @@ public class AlarmsFragment extends Fragment {
         initData();
         initRecycleView(view);
 
-//        btnTest = (Button) view.findViewById(R.id.btnTest);
-//        btnTest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getActivity(), "Testing alarmlist button click 2", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+
         floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
         floatingButton.setOnClickListener( (e) -> {
             Intent intent = new Intent(getContext(), AddAlarmActivity.class);
@@ -78,19 +73,22 @@ public class AlarmsFragment extends Fragment {
                 String minuteDur = data.getStringExtra(AddAlarmActivity.MINUTEDUR);
 
                 System.out.println("icon value: "+ iconPos  + " hour value: "+ hourDur + " minute: "+minuteDur);
-                Toast.makeText(getContext() , "testing reply"+iconPos + hourDur + minuteDur, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext() , "testing reply"+iconPos + hourDur + minuteDur, Toast.LENGTH_SHORT).show();
 
                 iconPosition = Integer.parseInt(iconPos);
                 hourDuration = Integer.parseInt(hourDur);
                 minuteDuration = Integer.parseInt(minuteDur);
 
-                listData.add(new AlarmItem(2131230831,"testIcon"));
+                // add new alarm item to recycleview from activity
+                listData.add(new AlarmItem(iconPosition,"testIcon"));
 
-//                listData.notify();
+                // notify adapter to update recycleview
                 adapter.notifyDataSetChanged();
 
             }
 
+        } else {
+            Log.d(TAG, "request code alarm, are wrong somehow");
         }
 
 
@@ -123,7 +121,7 @@ public class AlarmsFragment extends Fragment {
         listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
         listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
 
-        
+
 
 //        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
 //        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );

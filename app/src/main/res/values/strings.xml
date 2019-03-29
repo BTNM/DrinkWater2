@@ -16,6 +16,8 @@
     <string name="_1_5_hour">1,5 Hour</string>
     <string name="_2_hour">2 Hour</string>
     <string name="_3_hour">3 Hour</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 
     <string-array name="testSpinnerData">
         <item>BTNM Union</item>
