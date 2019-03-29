@@ -17,6 +17,7 @@ import com.example.btnm.drinkwater2.tabFragments.HomeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+// Setup recycleview adapter class
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();

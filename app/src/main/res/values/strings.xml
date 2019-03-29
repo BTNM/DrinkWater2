@@ -19,15 +19,15 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
 
-    <string-array name="testSpinnerData">
-        <item>BTNM Union</item>
-        <item>Malaysia</item>
-        <item>United States</item>
-        <item>Indonesia</item>
-        <item>France</item>
-        <item>Italy</item>
-        <item>Singapore</item>
-        <item>New Zealand</item>
-        <item>India</item>
-    </string-array>
+    <!--<string-array name="testSpinnerData">-->
+        <!--<item>BTNM Union</item>-->
+        <!--<item>Malaysia</item>-->
+        <!--<item>United States</item>-->
+        <!--<item>Indonesia</item>-->
+        <!--<item>France</item>-->
+        <!--<item>Italy</item>-->
+        <!--<item>Singapore</item>-->
+        <!--<item>New Zealand</item>-->
+        <!--<item>India</item>-->
+    <!--</string-array>-->
 </resources>
