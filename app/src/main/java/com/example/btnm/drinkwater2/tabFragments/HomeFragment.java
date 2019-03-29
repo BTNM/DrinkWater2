@@ -19,7 +19,6 @@ import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
 
 import java.util.LinkedList;
-import java.util.Map;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
@@ -104,8 +103,8 @@ public class HomeFragment extends Fragment {
         toggle45m = view.findViewById(R.id.switch45m);
         toggle45m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-                checkSwitches(toggle45m);
-                startAlarm();
+//                checkSwitches(toggle45m);
+                startAlarmWithRequestCode(10);
             } else {
                 cancelAlarm();
             }
@@ -114,8 +113,8 @@ public class HomeFragment extends Fragment {
         toggle1h = view.findViewById(R.id.switch1h);
         toggle1h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-                checkSwitches(toggle1h);
-                startAlarm();
+//                checkSwitches(toggle1h);
+                startAlarmWithRequestCode(20);
             } else {
                 cancelAlarm();
             }
@@ -192,14 +191,23 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public int convertHourMinToRequestCode (int hour, int minute) {
+        int temp = 0;
+        if (hour == 0) {
+            temp = minute;
+        } else {
+            temp = 60*hour + minute;
+        }
+        return temp;
+    }
+
     private void cancelAlarm() {
         Intent intent = new Intent(getContext() , NotificationReceiver.class);
         PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
 
         alarmManager.cancel(cancelPendingIntent);
     }
-
-
+    
     public void startAlarm () {
 //        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 //        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
@@ -209,6 +217,33 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(getContext() , NotificationReceiver.class);
 
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
+
+        alarmLinkedList.add(alarmPendingIntent);
+
+//        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
+        int minutes = 1;
+        int interval = 1000*60*minutes;
+
+        // set the alarm with time interval
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
+
+//        alarmLinkedList.indexOf(alarmPendingIntent);
+
+
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
+
+    }
+
+    public void startAlarmWithRequestCode(int requestCode) {
+//        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+
+        // create a alarmmanager and a pendingIntent, while saving the pendingIntent
+        alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
+        Intent intent = new Intent(getContext() , NotificationReceiver.class);
+
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
 
         alarmLinkedList.add(alarmPendingIntent);
 
