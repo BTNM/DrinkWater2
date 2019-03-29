@@ -105,7 +105,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 
     private void setupHourMinutePicker() {
         // setup number picker for the time of the alarm
-        
+
         minutePicker = (NumberPicker) findViewById(R.id.minutePicker);
         minutePicker.setMinValue(0);
         minutePicker.setMaxValue(60);
