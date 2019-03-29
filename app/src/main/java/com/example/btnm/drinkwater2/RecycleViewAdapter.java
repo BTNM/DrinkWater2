@@ -1,5 +1,6 @@
 package com.example.btnm.drinkwater2;
 
+import android.app.AlarmManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,14 +12,18 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.btnm.drinkwater2.tabFragments.HomeFragment;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
+    HomeFragment homeFragment;
+    AlarmManager alarmManager;
 
+    // the layout and content of an each item in the recycleview
     // takes the info from view in xml into each element in the recycleview
     public static class RecycleViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
@@ -76,6 +81,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             if (isChecked) {
                 // it works for now
                 System.out.println("test switch in recycleview for true");
+
+
             } else {
                 System.out.println("test switch in recycleview for false");
             }

@@ -23,7 +23,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 
     private static Integer[] imageIconData =  {
             R.drawable.ic_android, R.drawable.ic_audio, R.drawable.ic_sun, R.drawable.ic_add, R.drawable.ic_small_waterdrop_blue,R.drawable.ic_small_waterdrop_red };
-    private String[] imageNameData = { "android","audio","sun","add" };
+//    private String[] imageNameData = { "android","audio","sun","add" };
 
     public final static String ICONPOS = "com.example.btnm.ICONPOSITION";
     public final static String MINUTEDUR = "com.example.btnm.MINUTE";
@@ -33,9 +33,7 @@ public class AddAlarmActivity extends AppCompatActivity {
     private Spinner spinner;
     private NumberPicker minutePicker, hourPicker;
 
-    private int hourDuration;
-    private int minuteDuration;
-    private int iconPosition;
+    private int iconPosition, hourDuration, minuteDuration;
 
 //    private ArrayList<HashMap<String, Object>> spinnerList;
 //    private HashMap<String, Object> hashMap;
@@ -84,6 +82,7 @@ public class AddAlarmActivity extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.iconChooseSpinner);
 
+        // an arrayadapter that takes images, then set the spinner adapter to the image array
         SimpleImageArrayAdapter simpleImageArrayAdapter = new SimpleImageArrayAdapter(getBaseContext(), imageIconData);
         spinner.setAdapter(simpleImageArrayAdapter);
 

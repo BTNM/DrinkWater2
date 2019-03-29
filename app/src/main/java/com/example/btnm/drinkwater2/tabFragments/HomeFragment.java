@@ -14,12 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -28,10 +26,8 @@ public class HomeFragment extends Fragment {
 
     private AlarmManager alarmManager;
 //    private PendingIntent tempAlarmPendingIntent;
-    private Map<Integer, PendingIntent> alarmMap;
+//    private Map<Integer, PendingIntent> alarmMap;
     private LinkedList<PendingIntent> alarmLinkedList = new LinkedList<>();
-
-    int tempIndex;
 
     private int alarmNumber = 0;
 
@@ -64,8 +60,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupAlarmSwitches(View view) {
-        Intent intent = new Intent(getContext() , NotificationReceiver.class);
-        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
+//        Intent intent = new Intent(getContext() , NotificationReceiver.class);
+//        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
 
 //        alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
 //        alarmTestBtn.setOnClickListener((v) -> {
@@ -89,9 +85,10 @@ public class HomeFragment extends Fragment {
 //                alarmMap.put("",tempAlarmPendingIntent);
             } else {
 //                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-                alarmManager.cancel(cancelPendingIntent );
+                cancelAlarm();
             }
         } );
+
         toggle30m = view.findViewById(R.id.switch30m);
         toggle30m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
@@ -100,7 +97,7 @@ public class HomeFragment extends Fragment {
                 startAlarm();
 //                startAlarm("Switch 30m On");
             } else {
-                alarmManager.cancel(cancelPendingIntent );
+                cancelAlarm();
             }
         }));
 
@@ -110,7 +107,7 @@ public class HomeFragment extends Fragment {
                 checkSwitches(toggle45m);
                 startAlarm();
             } else {
-                alarmManager.cancel(cancelPendingIntent );
+                cancelAlarm();
             }
         }));
 
@@ -120,7 +117,7 @@ public class HomeFragment extends Fragment {
                 checkSwitches(toggle1h);
                 startAlarm();
             } else {
-                alarmManager.cancel(cancelPendingIntent );
+                cancelAlarm();
             }
         }));
 
@@ -130,7 +127,7 @@ public class HomeFragment extends Fragment {
                 checkSwitches(toggle1_5h);
                 startAlarm();
             } else {
-                alarmManager.cancel(cancelPendingIntent );
+                cancelAlarm();
             }
         }));
         
@@ -140,7 +137,7 @@ public class HomeFragment extends Fragment {
                 checkSwitches(toggle2h);
                 startAlarm();
             } else {
-                alarmManager.cancel(cancelPendingIntent );
+                cancelAlarm();
             }
         }));
 
@@ -193,6 +190,13 @@ public class HomeFragment extends Fragment {
             toggle1_5h.setChecked(false);
         }
 
+    }
+
+    private void cancelAlarm() {
+        Intent intent = new Intent(getContext() , NotificationReceiver.class);
+        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
+
+        alarmManager.cancel(cancelPendingIntent);
     }
 
 

@@ -33,9 +33,7 @@ public class AlarmsFragment extends Fragment {
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
 
-    private int iconPosition;
-    private int hourDuration;
-    private int minuteDuration;
+    private int iconPosition, hourDuration, minuteDuration;
 
     private FloatingActionButton floatingButton;
 
@@ -48,16 +46,7 @@ public class AlarmsFragment extends Fragment {
         initData();
         initRecycleView(view);
 
-
-
-        floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
-        floatingButton.setOnClickListener( (e) -> {
-            Intent intent = new Intent(getContext(), AddAlarmActivity.class);
-//            startActivity(intent);
-            startActivityForResult(intent, REQUEST_CODE_ALARMDATA);
-        } );
-
-
+        setupButton(view);
 
 
         return view;
@@ -72,7 +61,7 @@ public class AlarmsFragment extends Fragment {
                 String hourDur = data.getStringExtra(AddAlarmActivity.HOURDUR);
                 String minuteDur = data.getStringExtra(AddAlarmActivity.MINUTEDUR);
 
-                System.out.println("icon value: "+ iconPos  + " hour value: "+ hourDur + " minute: "+minuteDur);
+//                System.out.println("icon value: "+ iconPos  + " hour value: "+ hourDur + " minute: "+minuteDur);
 //                Toast.makeText(getContext() , "testing reply"+iconPos + hourDur + minuteDur, Toast.LENGTH_SHORT).show();
 
                 iconPosition = Integer.parseInt(iconPos);
@@ -91,6 +80,15 @@ public class AlarmsFragment extends Fragment {
             Log.d(TAG, "request code alarm, are wrong somehow");
         }
 
+    }
+
+    private void setupButton(View view) {
+        floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        floatingButton.setOnClickListener( (e) -> {
+            Intent intent = new Intent(getContext(), AddAlarmActivity.class);
+//            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_ALARMDATA);
+        } );
     }
 
     private String chooseHowMuchTime (int hourDuration, int minuteDuration) {
