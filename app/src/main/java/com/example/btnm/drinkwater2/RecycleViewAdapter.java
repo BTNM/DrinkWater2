@@ -21,8 +21,6 @@ import java.util.List;
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
-    HomeFragment homeFragment;
-    AlarmManager alarmManager;
 
     // the layout and content of an each item in the recycleview
     // takes the info from view in xml into each element in the recycleview

@@ -15,22 +15,26 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.example.btnm.drinkwater2.MainActivity;
 import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
     private AlarmManager alarmManager;
-//    private PendingIntent tempAlarmPendingIntent;
-//    private Map<Integer, PendingIntent> alarmMap;
     private LinkedList<PendingIntent> alarmLinkedList = new LinkedList<>();
+//    private Map<Integer, PendingIntent> alarmMap;
+
+    MainActivity mainActivity;
+
+    public ArrayList<Integer> alarmTimeDatabase = new ArrayList<>();
 
     private int alarmNumber = 0;
 
-    private Button alarmTestBtn;
     private Switch toggle15m;
     private Switch toggle30m;
     private Switch toggle45m;
@@ -43,60 +47,66 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home,container, false);
 
+        alarmTimeDatabase.add(111);
 
         setupAlarmSwitches(view);
+
 
 
         return view;
     }
 
-    public void setupAlarmList() {
-//        alarmMap = new LinkedHashMap();
+    public int getValueAlarmDatabaseFromTimePeriod(int time) {
+        int temp = alarmTimeDatabase.get(alarmTimeDatabase.indexOf(time ) );
 
-
-
-
+        return temp;
     }
 
     private void setupAlarmSwitches(View view) {
-//        Intent intent = new Intent(getContext() , NotificationReceiver.class);
-//        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
+        int requestCode = 0;
 
-//        alarmTestBtn = (Button) view.findViewById(R.id.alarmTestBtn);
-//        alarmTestBtn.setOnClickListener((v) -> {
-////            Toast.makeText(getContext(), "alarm btn test", Toast.LENGTH_SHO/RT).show();
-////            startAlarm();
-//
-//        });
+//        int test = alarmTimeDatabase.indexOf( convertHourMinToRequestCode(1,51) );
+//        System.out.println("test convertHMRC" + test );
+
 
         // switch connected to user interface
         toggle15m = view.findViewById(R.id.switch15m);
         toggle15m.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
             // toogle enabled
             if (isChecked) {
                 checkSwitches(toggle15m);
-
 //                Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
-                startAlarm();
 //                startAlarm("Switch 10m On");
-//                System.out.println("alarm pendingintent: "+tempAlarmPendingIntent.toString());
-//                alarmMap.put("",tempAlarmPendingIntent);
+
+//                alarmTimeDatabase.add(convertHourMinToRequestCode(0,15) );
+//                startAlarmWithRequestCode(alarmTimeDatabase.get(alarmTimeDatabase.indexOf(convertHourMinToRequestCode(0,15)) ) );
+//                System.out.println("test convertHourMinRC: "+ convertHourMinToRequestCode(0,15)+ " check from alarmdatabase: "+ alarmTimeDatabase.indexOf(convertHourMinToRequestCode(0,15)) );
+
+                alarmTimeDatabase.add(convertHourMinToRequestCode(0,15));
+                startAlarmWithRequestCode(getValueAlarmDatabaseFromTimePeriod(convertHourMinToRequestCode(0,15) ));
+
             } else {
 //                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-                cancelAlarm();
+//                System.out.println(" check from alarmdatabase: "+ alarmTimeDatabase.indexOf(convertHourMinToRequestCode(0,15)));
+                cancelAlarm(alarmTimeDatabase.get(alarmTimeDatabase.indexOf( convertHourMinToRequestCode(0,15)  ) ));
+                alarmTimeDatabase.remove(alarmTimeDatabase.indexOf( convertHourMinToRequestCode(0,15)  ));
+
             }
         } );
 
         toggle30m = view.findViewById(R.id.switch30m);
         toggle30m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
+//            requestCode = mainActivity.convertHourMinToRequestCode(0,30);
+
             if (isChecked) {
                 checkSwitches(toggle30m);
-//                Toast.makeText(getActivity(), "Switch 30m On", Toast.LENGTH_SHORT).show();
-                startAlarm();
-//                startAlarm("Switch 30m On");
+//                mainActivity.startAlarmWithRequestCode(requestCode );
+//                alarmTimeDatabase.add(mainActivity.convertHourMinToRequestCode(0,30) );
+//                mainActivity.startAlarmWithRequestCode(alarmTimeDatabase.get(alarmTimeDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
             } else {
-                cancelAlarm();
+//                mainActivity.cancelAlarm(requestCode );
+//                mainActivity.cancelAlarm(alarmTimeDatabase.get(alarmTimeDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
+//                alarmTimeDatabase.remove(mainActivity.convertHourMinToRequestCode(0,30));
             }
         }));
 
@@ -104,9 +114,9 @@ public class HomeFragment extends Fragment {
         toggle45m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
 //                checkSwitches(toggle45m);
-                startAlarmWithRequestCode(10);
+//                startAlarmWithRequestCode(10);
             } else {
-                cancelAlarm();
+//                cancelAlarm();
             }
         }));
 
@@ -114,9 +124,9 @@ public class HomeFragment extends Fragment {
         toggle1h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
 //                checkSwitches(toggle1h);
-                startAlarmWithRequestCode(20);
+//                startAlarmWithRequestCode(20);
             } else {
-                cancelAlarm();
+//                cancelAlarm();
             }
         }));
 
@@ -124,19 +134,19 @@ public class HomeFragment extends Fragment {
         toggle1_5h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
                 checkSwitches(toggle1_5h);
-                startAlarm();
+//                startAlarm();
             } else {
-                cancelAlarm();
+//                cancelAlarm();
             }
         }));
-        
+
         toggle2h= view.findViewById(R.id.switch2h);
         toggle2h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
                 checkSwitches(toggle2h);
-                startAlarm();
+//                startAlarm();
             } else {
-                cancelAlarm();
+//                cancelAlarm();
             }
         }));
 
@@ -201,13 +211,13 @@ public class HomeFragment extends Fragment {
         return temp;
     }
 
-    private void cancelAlarm() {
+        public void cancelAlarm(int requestCode) {
         Intent intent = new Intent(getContext() , NotificationReceiver.class);
-        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
+        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
 
         alarmManager.cancel(cancelPendingIntent);
     }
-    
+
     public void startAlarm () {
 //        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
 //        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
