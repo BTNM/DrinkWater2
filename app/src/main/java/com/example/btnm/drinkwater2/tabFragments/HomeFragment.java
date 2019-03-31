@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.example.btnm.drinkwater2.AlarmDatabase;
 import com.example.btnm.drinkwater2.MainActivity;
 import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
@@ -25,29 +26,20 @@ import java.util.LinkedList;
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
-    private AlarmManager alarmManager;
-    private LinkedList<PendingIntent> alarmLinkedList = new LinkedList<>();
-//    private Map<Integer, PendingIntent> alarmMap;
+//    private AlarmManager alarmManager;
+    private ArrayList<Integer> alarmListDatabase = new ArrayList<>();
+    private AlarmDatabase alarmDatabase;
 
-    MainActivity mainActivity;
-
-    public ArrayList<Integer> alarmTimeDatabase = new ArrayList<>();
-
-    private int alarmNumber = 0;
-
-    private Switch toggle15m;
-    private Switch toggle30m;
-    private Switch toggle45m;
-    private Switch toggle1h;
-    private Switch toggle1_5h;
-    private Switch toggle2h;
+    private Switch toggle15m, toggle30m, toggle45m, toggle1h, toggle1_5h, toggle2h;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home,container, false);
 
-        alarmTimeDatabase.add(111);
+        alarmDatabase = new AlarmDatabase(getContext(), alarmListDatabase);
+
+//        alarmListDatabase.add(111);
 
         setupAlarmSwitches(view);
 
@@ -56,18 +48,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public int getValueAlarmDatabaseFromTimePeriod(int time) {
-        int temp = alarmTimeDatabase.get(alarmTimeDatabase.indexOf(time ) );
-
-        return temp;
-    }
-
     private void setupAlarmSwitches(View view) {
         int requestCode = 0;
 
-//        int test = alarmTimeDatabase.indexOf( convertHourMinToRequestCode(1,51) );
+//        int test = alarmListDatabase.indexOf( convertHourMinToRequestCode(1,51) );
 //        System.out.println("test convertHMRC" + test );
-
 
         // switch connected to user interface
         toggle15m = view.findViewById(R.id.switch15m);
@@ -78,18 +63,24 @@ public class HomeFragment extends Fragment {
 //                Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
 //                startAlarm("Switch 10m On");
 
-//                alarmTimeDatabase.add(convertHourMinToRequestCode(0,15) );
-//                startAlarmWithRequestCode(alarmTimeDatabase.get(alarmTimeDatabase.indexOf(convertHourMinToRequestCode(0,15)) ) );
-//                System.out.println("test convertHourMinRC: "+ convertHourMinToRequestCode(0,15)+ " check from alarmdatabase: "+ alarmTimeDatabase.indexOf(convertHourMinToRequestCode(0,15)) );
+//                startAlarmWithRequestCode(alarmListDatabase.get(alarmListDatabase.indexOf(convertHourMinToRequestCode(0,15)) ) );
+//                System.out.println("test convertHourMinRC: "+ convertHourMinToRequestCode(0,15)+ " check from alarmdatabase: "+ alarmListDatabase.indexOf(convertHourMinToRequestCode(0,15)) );
 
-                alarmTimeDatabase.add(convertHourMinToRequestCode(0,15));
-                startAlarmWithRequestCode(getValueAlarmDatabaseFromTimePeriod(convertHourMinToRequestCode(0,15) ));
+                alarmDatabase.startAlarmWithRequestCode(0,15);
+
+//                alarmDatabase.getAlarmListDatabase().add(alarmDatabase.convertHourMinToRequestCode(0,15));
+//                alarmDatabase.startAlarmWithRequestCode(alarmDatabase.getAlarmListDatabase().get(alarmDatabase.getAlarmListDatabase().indexOf(alarmDatabase.convertHourMinToRequestCode(0,15))) );
+
 
             } else {
 //                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-//                System.out.println(" check from alarmdatabase: "+ alarmTimeDatabase.indexOf(convertHourMinToRequestCode(0,15)));
-                cancelAlarm(alarmTimeDatabase.get(alarmTimeDatabase.indexOf( convertHourMinToRequestCode(0,15)  ) ));
-                alarmTimeDatabase.remove(alarmTimeDatabase.indexOf( convertHourMinToRequestCode(0,15)  ));
+//                System.out.println(" check from alarmdatabase: "+ alarmListDatabase.indexOf(convertHourMinToRequestCode(0,15)));
+
+                alarmDatabase.cancelAlarm(0, 15);
+
+//                cancelAlarm(alarmListDatabase.get(alarmListDatabase.indexOf( convertHourMinToRequestCode(0,15)  ) ));
+//                alarmListDatabase.remove(alarmListDatabase.indexOf( convertHourMinToRequestCode(0,15)  ));
+
 
             }
         } );
@@ -101,12 +92,12 @@ public class HomeFragment extends Fragment {
             if (isChecked) {
                 checkSwitches(toggle30m);
 //                mainActivity.startAlarmWithRequestCode(requestCode );
-//                alarmTimeDatabase.add(mainActivity.convertHourMinToRequestCode(0,30) );
-//                mainActivity.startAlarmWithRequestCode(alarmTimeDatabase.get(alarmTimeDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
+//                alarmListDatabase.add(mainActivity.convertHourMinToRequestCode(0,30) );
+//                mainActivity.startAlarmWithRequestCode(alarmListDatabase.get(alarmListDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
             } else {
 //                mainActivity.cancelAlarm(requestCode );
-//                mainActivity.cancelAlarm(alarmTimeDatabase.get(alarmTimeDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
-//                alarmTimeDatabase.remove(mainActivity.convertHourMinToRequestCode(0,30));
+//                mainActivity.cancelAlarm(alarmListDatabase.get(alarmListDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
+//                alarmListDatabase.remove(mainActivity.convertHourMinToRequestCode(0,30));
             }
         }));
 
@@ -201,76 +192,50 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public int convertHourMinToRequestCode (int hour, int minute) {
-        int temp = 0;
-        if (hour == 0) {
-            temp = minute;
-        } else {
-            temp = 60*hour + minute;
-        }
-        return temp;
-    }
-
-        public void cancelAlarm(int requestCode) {
-        Intent intent = new Intent(getContext() , NotificationReceiver.class);
-        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
-
-        alarmManager.cancel(cancelPendingIntent);
-    }
-
-    public void startAlarm () {
-//        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-
-        // create a alarmmanager and a pendingIntent, while saving the pendingIntent
-        alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
-        Intent intent = new Intent(getContext() , NotificationReceiver.class);
-
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), alarmNumber, intent, 0);
-
-        alarmLinkedList.add(alarmPendingIntent);
-
-//        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
-        int minutes = 1;
-        int interval = 1000*60*minutes;
-
-        // set the alarm with time interval
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
-
-//        alarmLinkedList.indexOf(alarmPendingIntent);
-
-
-//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
-//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
-
-    }
-
-    public void startAlarmWithRequestCode(int requestCode) {
-//        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
-
-        // create a alarmmanager and a pendingIntent, while saving the pendingIntent
-        alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
-        Intent intent = new Intent(getContext() , NotificationReceiver.class);
-
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
-
-        alarmLinkedList.add(alarmPendingIntent);
-
-//        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
-        int minutes = 1;
-        int interval = 1000*60*minutes;
-
-        // set the alarm with time interval
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
-
-//        alarmLinkedList.indexOf(alarmPendingIntent);
-
-
-//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
-//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
-
-    }
+//    public int convertHourMinToRequestCode (int hour, int minute) {
+//        int temp = 0;
+//        if (hour == 0) {
+//            temp = minute;
+//        } else {
+//            temp = 60*hour + minute;
+//        }
+//        return temp;
+//    }
+//
+//    public void cancelAlarm(int requestCode) {
+//        Intent intent = new Intent(getContext() , NotificationReceiver.class);
+//        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
+//
+//        alarmManager.cancel(cancelPendingIntent);
+//    }
+//
+//
+//    public void startAlarmWithRequestCode(int requestCode) {
+////        alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+////        Intent intent = new Intent(getActivity(), NotificationReceiver.class);
+//
+//        // create a alarmmanager and a pendingIntent, while saving the pendingIntent
+//        alarmManager = (AlarmManager) getContext().getSystemService( Context.ALARM_SERVICE);
+//        Intent intent = new Intent(getContext() , NotificationReceiver.class);
+//
+//        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getContext(), requestCode, intent, 0);
+//
+////        alarmLinkedList.add(alarmPendingIntent);
+//
+////        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
+//        int minutes = 1;
+//        int interval = 1000*60*minutes;
+//
+//        // set the alarm with time interval
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
+//
+////        alarmLinkedList.indexOf(alarmPendingIntent);
+//
+//
+////        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES, AlarmManager.INTERVAL_HALF_HOUR, alarmPendingIntent);
+////        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis(), 1000*10, alarmPendingIntent);
+//
+//    }
 
 
 }

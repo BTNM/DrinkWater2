@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //    private AlarmManager alarmManager;
 //    //    private Map<Integer, PendingIntent> alarmMap;
 //    private LinkedList<PendingIntent> alarmLinkedList = new LinkedList<>();
-//    public static ArrayList<Integer> alarmTimeDatabase = new ArrayList<Integer>();
+//    public static ArrayList<Integer> alarmListDatabase = new ArrayList<Integer>();
 
 
     @Override
