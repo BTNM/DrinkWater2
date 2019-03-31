@@ -19,17 +19,7 @@ public class AlarmDatabase {
         this.alarmListDatabase = alarmTimeDatabase;
         this.context = context;
     }
-
-
-    public int convertHourMinToRequestCode (int hour, int minute) {
-        int temp = 0;
-        if (hour == 0) {
-            temp = minute;
-        } else {
-            temp = 60*hour + minute;
-        }
-        return temp;
-    }
+    
 
     public void cancelAlarm(int hour, int min) {
         int requestCode = convertHourMinToRequestCode(hour, min);
@@ -85,6 +75,16 @@ public class AlarmDatabase {
 
         // set the alarm with time interval
         alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+ 1000*2, interval, alarmPendingIntent);
+    }
+
+    public int convertHourMinToRequestCode (int hour, int minute) {
+        int temp = 0;
+        if (hour == 0) {
+            temp = minute;
+        } else {
+            temp = 60*hour + minute;
+        }
+        return temp;
     }
 
     public ArrayList<Integer> getAlarmListDatabase() {

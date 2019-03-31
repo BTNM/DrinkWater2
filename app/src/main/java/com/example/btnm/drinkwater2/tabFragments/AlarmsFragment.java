@@ -13,8 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.AlarmItem;
 import com.example.btnm.drinkwater2.R;
@@ -69,7 +67,7 @@ public class AlarmsFragment extends Fragment {
                 minuteDuration = Integer.parseInt(minuteDur);
 
                 // add new alarm item to recycleview from activity
-                listData.add(new AlarmItem(iconPosition, chooseHowMuchTime(hourDuration,minuteDuration)) );
+                listData.add(new AlarmItem(iconPosition, outputItemTimeLabel(hourDuration, minuteDuration)) );
 
                 // notify adapter to update recycleview
                 adapter.notifyDataSetChanged();
@@ -91,7 +89,7 @@ public class AlarmsFragment extends Fragment {
         } );
     }
 
-    private String chooseHowMuchTime (int hourDuration, int minuteDuration) {
+    private String outputItemTimeLabel(int hourDuration, int minuteDuration) {
         StringBuilder stringBuilder = new StringBuilder();
         String hour = " Hour ";
         String minute = " Min ";

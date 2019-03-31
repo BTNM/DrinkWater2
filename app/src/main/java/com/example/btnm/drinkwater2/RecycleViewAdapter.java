@@ -1,18 +1,13 @@
 package com.example.btnm.drinkwater2;
 
-import android.app.AlarmManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.btnm.drinkwater2.tabFragments.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +16,8 @@ import java.util.List;
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
+    private AlarmDatabase alarmDatabase;
+    private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
 
     // the layout and content of an each item in the recycleview
     // takes the info from view in xml into each element in the recycleview
@@ -62,6 +59,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         RecycleViewHolder recycleViewHolder = new RecycleViewHolder(itemView);
 
+        alarmDatabase = new AlarmDatabase(viewGroup.getContext(), alarmRequestCodeList);
+
         return recycleViewHolder;
     }
 
@@ -80,10 +79,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             if (isChecked) {
                 // it works for now
                 System.out.println("test switch in recycleview for true");
-
+                alarmDatabase.startAlarmWithRequestCode( 0,15);
 
             } else {
                 System.out.println("test switch in recycleview for false");
+                alarmDatabase.cancelAlarm(0,15);
             }
 
         });

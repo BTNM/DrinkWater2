@@ -1,33 +1,24 @@
 package com.example.btnm.drinkwater2.tabFragments;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Switch;
 
 import com.example.btnm.drinkwater2.AlarmDatabase;
-import com.example.btnm.drinkwater2.MainActivity;
-import com.example.btnm.drinkwater2.NotificationReceiver;
 import com.example.btnm.drinkwater2.R;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
 //    private AlarmManager alarmManager;
-    private ArrayList<Integer> alarmListDatabase = new ArrayList<>();
+    private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
     private AlarmDatabase alarmDatabase;
 
     private Switch toggle15m, toggle30m, toggle45m, toggle1h, toggle1_5h, toggle2h;
@@ -37,9 +28,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_home,container, false);
 
-        alarmDatabase = new AlarmDatabase(getContext(), alarmListDatabase);
+        alarmDatabase = new AlarmDatabase(getContext(), alarmRequestCodeList);
 
-//        alarmListDatabase.add(111);
+//        alarmRequestCodeList.add(111);
 
         setupAlarmSwitches(view);
 
@@ -51,7 +42,7 @@ public class HomeFragment extends Fragment {
     private void setupAlarmSwitches(View view) {
         int requestCode = 0;
 
-//        int test = alarmListDatabase.indexOf( convertHourMinToRequestCode(1,51) );
+//        int test = alarmRequestCodeList.indexOf( convertHourMinToRequestCode(1,51) );
 //        System.out.println("test convertHMRC" + test );
 
         // switch connected to user interface
@@ -63,8 +54,8 @@ public class HomeFragment extends Fragment {
 //                Toast.makeText(getActivity(), "Switch 10m On", Toast.LENGTH_SHORT).show();
 //                startAlarm("Switch 10m On");
 
-//                startAlarmWithRequestCode(alarmListDatabase.get(alarmListDatabase.indexOf(convertHourMinToRequestCode(0,15)) ) );
-//                System.out.println("test convertHourMinRC: "+ convertHourMinToRequestCode(0,15)+ " check from alarmdatabase: "+ alarmListDatabase.indexOf(convertHourMinToRequestCode(0,15)) );
+//                startAlarmWithRequestCode(alarmRequestCodeList.get(alarmRequestCodeList.indexOf(convertHourMinToRequestCode(0,15)) ) );
+//                System.out.println("test convertHourMinRC: "+ convertHourMinToRequestCode(0,15)+ " check from alarmdatabase: "+ alarmRequestCodeList.indexOf(convertHourMinToRequestCode(0,15)) );
 
                 alarmDatabase.startAlarmWithRequestCode(0,15);
 
@@ -74,12 +65,12 @@ public class HomeFragment extends Fragment {
 
             } else {
 //                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
-//                System.out.println(" check from alarmdatabase: "+ alarmListDatabase.indexOf(convertHourMinToRequestCode(0,15)));
+//                System.out.println(" check from alarmdatabase: "+ alarmRequestCodeList.indexOf(convertHourMinToRequestCode(0,15)));
 
                 alarmDatabase.cancelAlarm(0, 15);
 
-//                cancelAlarm(alarmListDatabase.get(alarmListDatabase.indexOf( convertHourMinToRequestCode(0,15)  ) ));
-//                alarmListDatabase.remove(alarmListDatabase.indexOf( convertHourMinToRequestCode(0,15)  ));
+//                cancelAlarm(alarmRequestCodeList.get(alarmRequestCodeList.indexOf( convertHourMinToRequestCode(0,15)  ) ));
+//                alarmRequestCodeList.remove(alarmRequestCodeList.indexOf( convertHourMinToRequestCode(0,15)  ));
 
 
             }
@@ -92,12 +83,14 @@ public class HomeFragment extends Fragment {
             if (isChecked) {
                 checkSwitches(toggle30m);
 //                mainActivity.startAlarmWithRequestCode(requestCode );
-//                alarmListDatabase.add(mainActivity.convertHourMinToRequestCode(0,30) );
-//                mainActivity.startAlarmWithRequestCode(alarmListDatabase.get(alarmListDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
+//                alarmRequestCodeList.add(mainActivity.convertHourMinToRequestCode(0,30) );
+//                mainActivity.startAlarmWithRequestCode(alarmRequestCodeList.get(alarmRequestCodeList.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
+                alarmDatabase.startAlarmWithRequestCode(0,30);
             } else {
+                alarmDatabase.cancelAlarm(0, 30);
 //                mainActivity.cancelAlarm(requestCode );
-//                mainActivity.cancelAlarm(alarmListDatabase.get(alarmListDatabase.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
-//                alarmListDatabase.remove(mainActivity.convertHourMinToRequestCode(0,30));
+//                mainActivity.cancelAlarm(alarmRequestCodeList.get(alarmRequestCodeList.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
+//                alarmRequestCodeList.remove(mainActivity.convertHourMinToRequestCode(0,30));
             }
         }));
 
@@ -106,8 +99,10 @@ public class HomeFragment extends Fragment {
             if (isChecked) {
 //                checkSwitches(toggle45m);
 //                startAlarmWithRequestCode(10);
+                alarmDatabase.startAlarmWithRequestCode(0,45);
             } else {
 //                cancelAlarm();
+                alarmDatabase.cancelAlarm(0, 45);
             }
         }));
 
@@ -116,8 +111,10 @@ public class HomeFragment extends Fragment {
             if (isChecked) {
 //                checkSwitches(toggle1h);
 //                startAlarmWithRequestCode(20);
+                alarmDatabase.startAlarmWithRequestCode(1,0);
             } else {
 //                cancelAlarm();
+                alarmDatabase.cancelAlarm(1, 0);
             }
         }));
 
@@ -126,8 +123,10 @@ public class HomeFragment extends Fragment {
             if (isChecked) {
                 checkSwitches(toggle1_5h);
 //                startAlarm();
+                alarmDatabase.startAlarmWithRequestCode(1,30);
             } else {
 //                cancelAlarm();
+                alarmDatabase.cancelAlarm(1, 30);
             }
         }));
 
@@ -136,8 +135,10 @@ public class HomeFragment extends Fragment {
             if (isChecked) {
                 checkSwitches(toggle2h);
 //                startAlarm();
+                alarmDatabase.startAlarmWithRequestCode(2,0);
             } else {
 //                cancelAlarm();
+                alarmDatabase.cancelAlarm(2, 0);
             }
         }));
 
