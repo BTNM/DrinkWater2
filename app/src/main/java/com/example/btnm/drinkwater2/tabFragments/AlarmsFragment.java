@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.btnm.drinkwater2.AlarmDatabase;
 import com.example.btnm.drinkwater2.AlarmItem;
 import com.example.btnm.drinkwater2.R;
 import com.example.btnm.drinkwater2.RecycleViewAdapter;
@@ -31,9 +32,12 @@ public class AlarmsFragment extends Fragment {
 
     private List<AlarmItem> listData = new ArrayList<AlarmItem>();
 
-    private int iconPosition, hourDuration, minuteDuration;
+//    private AlarmDatabase alarmDatabase;
+    private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
 
+    private int iconPosition, hourDuration, minuteDuration;
     private FloatingActionButton floatingButton;
+
 
     @Nullable
     @Override
@@ -44,12 +48,20 @@ public class AlarmsFragment extends Fragment {
         initData();
         initRecycleView(view);
 
+//        alarmDatabase = new AlarmDatabase(getContext(), alarmRequestCodeList);
+
         setupButton(view);
 
 
         return view;
     }
 
+
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_ALARMDATA) {
@@ -66,8 +78,11 @@ public class AlarmsFragment extends Fragment {
                 hourDuration = Integer.parseInt(hourDur);
                 minuteDuration = Integer.parseInt(minuteDur);
 
+
+
                 // add new alarm item to recycleview from activity
-                listData.add(new AlarmItem(iconPosition, outputItemTimeLabel(hourDuration, minuteDuration)) );
+                AlarmItem tempAlarmItem = new AlarmItem(iconPosition, (hourDur+" "+minuteDur) );
+                listData.add(tempAlarmItem);
 
                 // notify adapter to update recycleview
                 adapter.notifyDataSetChanged();
@@ -89,23 +104,23 @@ public class AlarmsFragment extends Fragment {
         } );
     }
 
-    private String outputItemTimeLabel(int hourDuration, int minuteDuration) {
-        StringBuilder stringBuilder = new StringBuilder();
-        String hour = " Hour ";
-        String minute = " Min ";
-
-        if (hourDuration == 0) {
-            stringBuilder.append(minuteDuration);
-            stringBuilder.append(minute);
-        } else {
-            stringBuilder.append(hourDuration);
-            stringBuilder.append(hour);
-            stringBuilder.append(minuteDuration);
-            stringBuilder.append(minute);
-        }
-
-        return stringBuilder.toString();
-    }
+//    private String outputItemTimeLabel(int hourDuration, int minuteDuration) {
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String hour = " Hour ";
+//        String minute = " Min ";
+//
+//        if (hourDuration == 0) {
+//            stringBuilder.append(minuteDuration);
+//            stringBuilder.append(minute);
+//        } else {
+//            stringBuilder.append(hourDuration);
+//            stringBuilder.append(hour);
+//            stringBuilder.append(minuteDuration);
+//            stringBuilder.append(minute);
+//        }
+//
+//        return stringBuilder.toString();
+//    }
 
     private void initRecycleView(View view) {
         recyclerView = (RecyclerView)  view.findViewById(R.id.recycler);
@@ -126,13 +141,9 @@ public class AlarmsFragment extends Fragment {
 
     private void initData() {
 
-//        listData.add(new AlarmItem(R.drawable.ic_android,"Android Icon"));
-//        listData.add(new AlarmItem(R.drawable.ic_sun,"Sun Icon" ));
-//        listData.add(new AlarmItem(R.drawable.ic_audio,"Audio Icon"));
-
-        listData.add(new AlarmItem(R.drawable.ic_android,"45 Min"));
-        listData.add(new AlarmItem(R.drawable.ic_sun,"1 Hour 15 Min" ));
-        listData.add(new AlarmItem(R.drawable.ic_audio,"2 Hour"));
+        listData.add(new AlarmItem(R.drawable.ic_android,"0 45"));
+        listData.add(new AlarmItem(R.drawable.ic_sun,"1 15" ));
+        listData.add(new AlarmItem(R.drawable.ic_audio,"2 0"));
 
 //        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
 //        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );

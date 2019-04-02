@@ -110,10 +110,8 @@ public class HomeFragment extends Fragment {
         toggle1h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
 //                checkSwitches(toggle1h);
-//                startAlarmWithRequestCode(20);
                 alarmDatabase.startAlarmWithRequestCode(1,0);
             } else {
-//                cancelAlarm();
                 alarmDatabase.cancelAlarm(1, 0);
             }
         }));
@@ -122,10 +120,8 @@ public class HomeFragment extends Fragment {
         toggle1_5h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
                 checkSwitches(toggle1_5h);
-//                startAlarm();
                 alarmDatabase.startAlarmWithRequestCode(1,30);
             } else {
-//                cancelAlarm();
                 alarmDatabase.cancelAlarm(1, 30);
             }
         }));
@@ -134,10 +130,8 @@ public class HomeFragment extends Fragment {
         toggle2h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
                 checkSwitches(toggle2h);
-//                startAlarm();
                 alarmDatabase.startAlarmWithRequestCode(2,0);
             } else {
-//                cancelAlarm();
                 alarmDatabase.cancelAlarm(2, 0);
             }
         }));

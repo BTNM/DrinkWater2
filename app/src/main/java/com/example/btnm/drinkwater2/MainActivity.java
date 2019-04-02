@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tableLayout = (TabLayout) findViewById(R.id.allTabs);
         tableLayout.setupWithViewPager(mViewPager);
 
-        System.out.println(" app context 1: "+ getApplicationContext() );
+//        System.out.println(" app context 1: "+ getApplicationContext() );
 
 
 

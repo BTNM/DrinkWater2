@@ -15,17 +15,18 @@ import java.util.List;
 // Setup recycleview adapter class
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
-    private List<AlarmItem> listData = new ArrayList<AlarmItem>();
+    private List<AlarmItem> listData;
     private AlarmDatabase alarmDatabase;
     private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
 
-    // the layout and content of an each item in the recycleview
-    // takes the info from view in xml into each element in the recycleview
+    /**
+     *  the layout and content of an each item in the recycleview
+     *  takes the info from view in xml into each element in the recycleview
+     */
     public static class RecycleViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         private TextView repeatingAlarmTime;
         private Switch activeSwitch;
-
 //        public TextView txtDescription1;
 //        public TextView txtDescription2;
 
@@ -41,19 +42,28 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         }
     }
 
-    //Takes a List<Model> as a parameter which is the data to display
+    /**
+     * Takes a List<Model> as a parameter which is the data to display
+     * @param listData list of all items in the recycle view
+     */
     public RecycleViewAdapter(List<AlarmItem> listData) {
         this.listData = listData;
 
     }
 
-    // this method is responsible for creating our ViewHolder
+    /**
+     * this method is responsible for creating our ViewHolder
+     *
+     * Create a View by inflating our XML layout
+     * Return an instance of our ViewHolder while passing the previously created view as parameter.
+     * inflate layout from xml file into each alarm element
+     * @param viewGroup
+     * @param i
+     * @return return recycleView Holder with the inflated layout
+     */
     @NonNull
     @Override
     public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        //    Create a View by inflating our XML layout
-        //    Return an instance of our ViewHolder while passing the previously created view as parameter.
-        //    inflate layout from xml file into each alarm element
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext() );
         View itemView = inflater.inflate(R.layout.alarm_item, viewGroup, false);
 
@@ -64,38 +74,76 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return recycleViewHolder;
     }
 
-    //method binds our ViewHolder with the model, which each item in recycleview has
+    /**
+     * method binds our ViewHolder with the model, which each item in recycleview has
+     * Cast the RecyclerView.ViewHolder to the ViewHolder that we’ve created
+     * Use the helper bindData method to actually connect the model and UI
+     * on each alarm element take image and txt
+     * @param recycleViewHolder
+     * @param i
+     */
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder recycleViewHolder, int i) {
-        //    Cast the RecyclerView.ViewHolder to the ViewHolder that we’ve created
-        //    Use the helper bindData method to actually connect the model and UI
-        //    on each alarm element take image and txt
 //        AlarmItem dataItem = listData.get(i);
 
         recycleViewHolder.imageView.setImageResource(listData.get(i).getImageID() );
-        recycleViewHolder.repeatingAlarmTime.setText(listData.get(i).getRepeatingAlarmTime() );
+
+        String timeLabelFromAlarmItem = listData.get(i).getRepeatingAlarmTime();
+        String[] alarmTime = timeLabelFromAlarmItem.split(" ");
+        int hour = Integer.parseInt(alarmTime[0]);
+        int minute = Integer.parseInt(alarmTime[1]);
+        recycleViewHolder.repeatingAlarmTime.setText( outputItemTimeLabel(hour, minute) );
+//        System.out.println("output of text label of alarm item :"+ timeLabelFromAlarmItem+ " split temp :" + alarmTime[0] + " " +alarmTime[1] );
 
         recycleViewHolder.activeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // it works for now
-                System.out.println("test switch in recycleview for true");
-                alarmDatabase.startAlarmWithRequestCode( 0,15);
+                // possible to set alarm right here and cancel it , but wont have anything to do with alarmFragment actitivity
+
+                System.out.println("test hour :" + hour + " minute :" + minute);
+                alarmDatabase.startAlarmWithRequestCode(hour, minute);
 
             } else {
-                System.out.println("test switch in recycleview for false");
-                alarmDatabase.cancelAlarm(0,15);
+//                System.out.println("test switch in recycleview for false");
+                alarmDatabase.cancelAlarm(hour, minute);
+
             }
 
         });
 //        recycleViewHolder.activeSwitch.setChecked(listData.get(i).getActiveSwitch().isChecked() );
-
 
 //        recycleViewHolder.txtDescription1.setText(listData.get(i).getDescription1() );
 //        recycleViewHolder.txtDescription2.setText(listData.get(i).getDescription2() );
 
     }
 
-    //how many records do we have to display
+    /**
+     * takes in time period as parameter to output string text as label for the alarm item
+     * @param hourDuration
+     * @param minuteDuration
+     * @return
+     */
+    private String outputItemTimeLabel(int hourDuration, int minuteDuration) {
+        StringBuilder stringBuilder = new StringBuilder();
+        String hour = " Hour ";
+        String minute = " Min ";
+
+        if (hourDuration == 0) {
+            stringBuilder.append(minuteDuration);
+            stringBuilder.append(minute);
+        } else {
+            stringBuilder.append(hourDuration);
+            stringBuilder.append(hour);
+            stringBuilder.append(minuteDuration);
+            stringBuilder.append(minute);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * how many records do we have to display
+     * @return
+     */
     @Override
     public int getItemCount() {
         return listData.size();

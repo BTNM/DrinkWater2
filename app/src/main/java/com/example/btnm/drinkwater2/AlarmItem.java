@@ -22,12 +22,6 @@ public class AlarmItem {
         this.repeatingAlarmTime = repeatingAlarmTime;
     }
 
-    public AlarmItem(int imageID, String repeatingAlarmTime, Switch activeSwitch) {
-        this.imageID = imageID;
-        this.repeatingAlarmTime = repeatingAlarmTime;
-        this.activeSwitch = activeSwitch;
-    }
-
     public int getImageID() {
         return imageID;
     }

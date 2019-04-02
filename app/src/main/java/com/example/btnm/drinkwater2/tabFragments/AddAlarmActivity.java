@@ -22,8 +22,13 @@ import java.util.HashMap;
 public class AddAlarmActivity extends AppCompatActivity {
 
     private static Integer[] imageIconData =  {
-            R.drawable.ic_android, R.drawable.ic_audio, R.drawable.ic_sun, R.drawable.ic_add, R.drawable.ic_small_waterdrop_blue,R.drawable.ic_small_waterdrop_red };
-//    private String[] imageNameData = { "android","audio","sun","add" };
+            R.drawable.ic_android,
+            R.drawable.ic_audio,
+            R.drawable.ic_sun,
+            R.drawable.ic_add,
+            R.drawable.ic_small_waterdrop_blue,
+            R.drawable.ic_small_waterdrop_red
+    };
 
     public final static String ICONPOS = "com.example.btnm.ICONPOSITION";
     public final static String MINUTEDUR = "com.example.btnm.MINUTE";
