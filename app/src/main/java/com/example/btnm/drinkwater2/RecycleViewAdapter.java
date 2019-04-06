@@ -89,6 +89,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         String timeLabelFromAlarmItem = itemListData.get(i).getRepeatingAlarmTime();
         String[] alarmTime = timeLabelFromAlarmItem.split(" ");
+        System.out.println("alarmTime in onBindViewHolder: " + timeLabelFromAlarmItem);
         int hour = Integer.parseInt(alarmTime[0]);
         int minute = Integer.parseInt(alarmTime[1]);
         recycleViewHolder.repeatingAlarmTime.setText( outputItemTimeLabel(hour, minute) );

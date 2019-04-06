@@ -47,7 +47,7 @@ public class AlarmsFragment extends Fragment {
     private FloatingActionButton floatingButton;
 
 //    private static final String FILE_NAME = "DrinkWaterStorage.txt";
-    private static final String FILE_NAME = "internalStorageTest.txt";
+    private static final String FILE_NAME = "internalStorageTest1.txt";
 
 
     @Nullable
@@ -56,8 +56,9 @@ public class AlarmsFragment extends Fragment {
         View view = inflater.inflate(R.layout.tab_alarms,container, false);
 
         // create adapter and layout manager, and set data list to the adapter, before setting recycle view to the adapater and layout manager
-        initTestData();
+//        initTestData();
         initRecycleView(view);
+//        readAlarmListFromStorage();
 
 //        alarmDatabase = new AlarmDatabase(getContext(), alarmRequestCodeList);
         setupButton(view);
@@ -94,7 +95,10 @@ public class AlarmsFragment extends Fragment {
 
                 // add new alarm item to recycleview from activity
                 AlarmItem tempAlarmItem = new AlarmItem(iconPosition, (hourDur+" "+minuteDur) );
-                listData.add(tempAlarmItem);
+//                listData.add(tempAlarmItem);
+                addAlarmItemToListAndStorage(tempAlarmItem, false);
+
+                readAlarmListFromStorage();
 
                 // notify adapter to update recycleview
                 adapter.notifyItemInserted(listData.size() );
@@ -107,26 +111,10 @@ public class AlarmsFragment extends Fragment {
 
     }
 
-    public void readAlarmListFromStorage () {
-        String storageTxt = readFile();
-        // split all text in storage by newlines
-        String[] itemListRaw = storageTxt.split("\n");
-
-        for (String lines : itemListRaw) {
-            // split each line by space
-            String[] lineSplitted = lines.split(" ");
-
-            listData.add(new AlarmItem(Integer.valueOf(lineSplitted[0]), lineSplitted[1]+" "+lineSplitted[2]) );
-
-        }
-
-
-    }
-
-    public void addAlarmItemToListAndStorage (AlarmItem alarmItem) {
-        listData.add(alarmItem);
+    public void addAlarmItemToListAndStorage (AlarmItem alarmItem, boolean appendToFile) {
+//        listData.add(alarmItem);
         String tempLine = ""+alarmItem.getImageID()+" "+ alarmItem.getRepeatingAlarmTime();
-        writeFile(tempLine, true);
+        writeFile(tempLine, appendToFile);
     }
 
     public void writeFile (String addLine, Boolean appendToFile) {
@@ -197,6 +185,23 @@ public class AlarmsFragment extends Fragment {
         return stringBuilder.toString();
     }
 
+    public void readAlarmListFromStorage () {
+        String storageTxt = readFile();
+        System.out.println("storageText :" + storageTxt);
+        // split all text in storage by newlines
+        String[] itemListRaw = storageTxt.split("\n");
+
+        for (String lines : itemListRaw) {
+            // split each line by space
+            String[] lineSplitted = lines.split(" ");
+
+            listData.add(new AlarmItem(Integer.valueOf(lineSplitted[0]), lineSplitted[1]+" "+lineSplitted[2]) );
+        }
+        adapter.notifyItemInserted(listData.size() );
+        adapter.notifyDataSetChanged();
+
+    }
+
     private void setupButton(View view) {
         floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
         floatingButton.setOnClickListener( (e) -> {
@@ -246,9 +251,11 @@ public class AlarmsFragment extends Fragment {
 
     private void initTestData() {
 
-        listData.add(new AlarmItem(R.drawable.ic_android,"0 45"));
-        listData.add(new AlarmItem(R.drawable.ic_sun,"1 15" ));
-        listData.add(new AlarmItem(R.drawable.ic_audio,"2 0"));
+//        listData.add(new AlarmItem(R.drawable.ic_android,"0 45"));
+//        listData.add(new AlarmItem(R.drawable.ic_sun,"1 15" ));
+//        listData.add(new AlarmItem(R.drawable.ic_audio,"2 0"));
+
+
 
 //        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
 //        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );

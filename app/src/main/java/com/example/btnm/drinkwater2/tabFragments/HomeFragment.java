@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
 
     private Switch toggle15m, toggle30m, toggle45m, toggle1h, toggle1_5h, toggle2h;
 
-    private static final String FILE_NAME = "internalStorageTest.txt";
+//    private static final String FILE_NAME = "internalStorageTest3.txt";
    Button testBtn1, testBtn2;
 
     @Nullable
@@ -46,77 +46,77 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-    public void writeFile () {
-        String inputText = "testing write to file";
-//        String fileName = "App test file.txt";
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
-            fileOutputStream.write(inputText.getBytes());
-//            fileOutputStream.close();
-
-            Toast.makeText(getContext(), "test text saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    public void readFile () {
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = getContext().openFileInput(FILE_NAME);
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            BufferedReader bufferedReader1 = new BufferedReader(new InputStreamReader(getContext().openFileInput(FILE_NAME)) );
-
-            StringBuffer stringBuffer = new StringBuffer();
-
-            String tempLines;
-            while ((tempLines = bufferedReader.readLine()) != null ) {
-                stringBuffer.append(tempLines + "\n");
-            }
-
-            Toast.makeText(getContext(), stringBuffer.toString(), Toast.LENGTH_SHORT).show();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+//    public void writeFile () {
+//        String inputText = "testing write to file";
+////        String fileName = "App test file.txt";
+//        FileOutputStream fileOutputStream = null;
+//        try {
+//            fileOutputStream = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+//            fileOutputStream.write(inputText.getBytes());
+////            fileOutputStream.close();
+//
+//            Toast.makeText(getContext(), "test text saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (fileOutputStream != null) {
+//                try {
+//                    fileOutputStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//
+//    }
+//
+//    public void readFile () {
+//        FileInputStream fileInputStream = null;
+//        try {
+//            fileInputStream = getContext().openFileInput(FILE_NAME);
+//            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+////            BufferedReader bufferedReader1 = new BufferedReader(new InputStreamReader(getContext().openFileInput(FILE_NAME)) );
+//
+//            StringBuffer stringBuffer = new StringBuffer();
+//
+//            String tempLines;
+//            while ((tempLines = bufferedReader.readLine()) != null ) {
+//                stringBuffer.append(tempLines + "\n");
+//            }
+//
+//            Toast.makeText(getContext(), stringBuffer.toString(), Toast.LENGTH_SHORT).show();
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (fileInputStream != null) {
+//                try {
+//                    fileInputStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     /**
      * switches connected to the user interface
      * @param view
      */
     private void setupAlarmSwitches(View view) {
-        testBtn1 = view.findViewById(R.id.btnTest);
-        testBtn1.setOnClickListener( e -> {
-            writeFile();
-        });
-        testBtn2 = view.findViewById(R.id.alarmTestBtn);
-        testBtn2.setOnClickListener( e -> {
-            readFile();
-        });
+//        testBtn1 = view.findViewById(R.id.btnTest);
+//        testBtn1.setOnClickListener( e -> {
+//            writeFile();
+//        });
+//        testBtn2 = view.findViewById(R.id.alarmTestBtn);
+//        testBtn2.setOnClickListener( e -> {
+//            readFile();
+//        });
 
         toggle15m = view.findViewById(R.id.switch15m);
         toggle15m.setOnCheckedChangeListener((buttonView, isChecked) -> {
