@@ -5,14 +5,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class AlarmDatabase {
 
     private AlarmManager alarmManager;
-    private ArrayList<Integer> alarmListDatabase;
+    private ArrayList<Integer> alarmCodeList;
     private Context context;
 
 
@@ -22,7 +21,7 @@ public class AlarmDatabase {
      * @param alarmTimeDatabase
      */
     public AlarmDatabase(Context context, ArrayList<Integer> alarmTimeDatabase) {
-        this.alarmListDatabase = alarmTimeDatabase;
+        this.alarmCodeList = alarmTimeDatabase;
         this.context = context;
     }
 
@@ -36,9 +35,8 @@ public class AlarmDatabase {
     public void cancelAlarm(int hour, int min) {
         int requestCode = convertHourMinToRequestCode(hour, min);
 
-        int index = alarmListDatabase.indexOf(requestCode);
-        int pickedAlarmTime = alarmListDatabase.get(index );
-
+        int index = alarmCodeList.indexOf(requestCode);
+        int pickedAlarmTime = alarmCodeList.get(index );
 
         Intent intent = new Intent( context, NotificationReceiver.class);
         PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(context, pickedAlarmTime, intent, 0);
@@ -46,7 +44,7 @@ public class AlarmDatabase {
         alarmManager.cancel(cancelPendingIntent);
 
         System.out.println("in database remove requestCode: " + pickedAlarmTime+ " index: "+ index);
-        alarmListDatabase.remove(index);
+        alarmCodeList.remove(index);
     }
 
 //    public void startAlarm () {
@@ -84,7 +82,7 @@ public class AlarmDatabase {
         Intent intent = new Intent(context , NotificationReceiver.class);
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
 
-        alarmListDatabase.add(requestCode);
+        alarmCodeList.add(requestCode);
 //        System.out.println("in database add requestCode: " + requestCode);
 
 //        Millisec * Second * Minutes, setInexctRepeating minimum interval about 1 min
@@ -111,12 +109,12 @@ public class AlarmDatabase {
         return temp;
     }
 
-    public ArrayList<Integer> getAlarmListDatabase() {
-        return alarmListDatabase;
+    public ArrayList<Integer> getAlarmCodeList() {
+        return alarmCodeList;
     }
 
-    public void setAlarmListDatabase(ArrayList<Integer> alarmListDatabase) {
-        this.alarmListDatabase = alarmListDatabase;
+    public void setAlarmCodeList(ArrayList<Integer> alarmCodeList) {
+        this.alarmCodeList = alarmCodeList;
     }
 
 

@@ -54,8 +54,8 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void turnScreenOn(Context context) {
         // uses power manager to turn on illumination for an instant before releasing to save battery life, usually for notification
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        WakeLock wakeLock = powerManager.newWakeLock( PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
-
+        WakeLock wakeLock = powerManager.newWakeLock( PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
+//        PowerManager.SCREEN_BRIGHT_WAKE_LOCK
         if (wakeLock != null) {
             wakeLock.acquire();
         }

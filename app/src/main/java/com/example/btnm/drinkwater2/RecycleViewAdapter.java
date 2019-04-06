@@ -15,7 +15,7 @@ import java.util.List;
 // Setup recycleview adapter class
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
 
-    private List<AlarmItem> listData;
+    private List<AlarmItem> itemListData;
     private AlarmDatabase alarmDatabase;
     private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
 
@@ -44,10 +44,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     /**
      * Takes a List<Model> as a parameter which is the data to display
-     * @param listData list of all items in the recycle view
+     * @param itemListData list of all items in the recycle view
      */
-    public RecycleViewAdapter(List<AlarmItem> listData) {
-        this.listData = listData;
+    public RecycleViewAdapter(List<AlarmItem> itemListData) {
+        this.itemListData = itemListData;
 
     }
 
@@ -80,15 +80,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
      * Use the helper bindData method to actually connect the model and UI
      * on each alarm element take image and txt
      * @param recycleViewHolder
-     * @param i
+     * @param i position of the item in the arraylist
      */
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder recycleViewHolder, int i) {
-//        AlarmItem dataItem = listData.get(i);
+        //binding data with the viewholder views
+        recycleViewHolder.imageView.setImageResource(itemListData.get(i).getImageID() );
 
-        recycleViewHolder.imageView.setImageResource(listData.get(i).getImageID() );
-
-        String timeLabelFromAlarmItem = listData.get(i).getRepeatingAlarmTime();
+        String timeLabelFromAlarmItem = itemListData.get(i).getRepeatingAlarmTime();
         String[] alarmTime = timeLabelFromAlarmItem.split(" ");
         int hour = Integer.parseInt(alarmTime[0]);
         int minute = Integer.parseInt(alarmTime[1]);
@@ -98,7 +97,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         recycleViewHolder.activeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 // possible to set alarm right here and cancel it , but wont have anything to do with alarmFragment actitivity
-
                 System.out.println("test hour :" + hour + " minute :" + minute);
                 alarmDatabase.startAlarmWithRequestCode(hour, minute);
 
@@ -109,10 +107,20 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             }
 
         });
-//        recycleViewHolder.activeSwitch.setChecked(listData.get(i).getActiveSwitch().isChecked() );
 
-//        recycleViewHolder.txtDescription1.setText(listData.get(i).getDescription1() );
-//        recycleViewHolder.txtDescription2.setText(listData.get(i).getDescription2() );
+//        recycleViewHolder
+
+//        recycleViewHolder.activeSwitch.setChecked(itemListData.get(i).getActiveSwitch().isChecked() );
+
+//        recycleViewHolder.txtDescription1.setText(itemListData.get(i).getDescription1() );
+//        recycleViewHolder.txtDescription2.setText(itemListData.get(i).getDescription2() );
+
+    }
+
+    public void removeAtPosition (int position) {
+        itemListData.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, itemListData.size() );
 
     }
 
@@ -146,6 +154,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
      */
     @Override
     public int getItemCount() {
-        return listData.size();
+        return itemListData.size();
     }
 }

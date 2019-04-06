@@ -1,5 +1,6 @@
 package com.example.btnm.drinkwater2.tabFragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,21 +8,31 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.btnm.drinkwater2.AlarmDatabase;
 import com.example.btnm.drinkwater2.R;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "Tab Home";
 
-//    private AlarmManager alarmManager;
     private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
     private AlarmDatabase alarmDatabase;
 
     private Switch toggle15m, toggle30m, toggle45m, toggle1h, toggle1_5h, toggle2h;
+
+    private static final String FILE_NAME = "internalStorageTest.txt";
+   Button testBtn1, testBtn2;
 
     @Nullable
     @Override
@@ -30,22 +41,83 @@ public class HomeFragment extends Fragment {
 
         alarmDatabase = new AlarmDatabase(getContext(), alarmRequestCodeList);
 
-//        alarmRequestCodeList.add(111);
-
         setupAlarmSwitches(view);
-
 
 
         return view;
     }
+    public void writeFile () {
+        String inputText = "testing write to file";
+//        String fileName = "App test file.txt";
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
+            fileOutputStream.write(inputText.getBytes());
+//            fileOutputStream.close();
 
+            Toast.makeText(getContext(), "test text saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public void readFile () {
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = getContext().openFileInput(FILE_NAME);
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//            BufferedReader bufferedReader1 = new BufferedReader(new InputStreamReader(getContext().openFileInput(FILE_NAME)) );
+
+            StringBuffer stringBuffer = new StringBuffer();
+
+            String tempLines;
+            while ((tempLines = bufferedReader.readLine()) != null ) {
+                stringBuffer.append(tempLines + "\n");
+            }
+
+            Toast.makeText(getContext(), stringBuffer.toString(), Toast.LENGTH_SHORT).show();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * switches connected to the user interface
+     * @param view
+     */
     private void setupAlarmSwitches(View view) {
-        int requestCode = 0;
+        testBtn1 = view.findViewById(R.id.btnTest);
+        testBtn1.setOnClickListener( e -> {
+            writeFile();
+        });
+        testBtn2 = view.findViewById(R.id.alarmTestBtn);
+        testBtn2.setOnClickListener( e -> {
+            readFile();
+        });
 
-//        int test = alarmRequestCodeList.indexOf( convertHourMinToRequestCode(1,51) );
-//        System.out.println("test convertHMRC" + test );
-
-        // switch connected to user interface
         toggle15m = view.findViewById(R.id.switch15m);
         toggle15m.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // toogle enabled
@@ -55,50 +127,30 @@ public class HomeFragment extends Fragment {
 //                startAlarm("Switch 10m On");
 
 //                startAlarmWithRequestCode(alarmRequestCodeList.get(alarmRequestCodeList.indexOf(convertHourMinToRequestCode(0,15)) ) );
-//                System.out.println("test convertHourMinRC: "+ convertHourMinToRequestCode(0,15)+ " check from alarmdatabase: "+ alarmRequestCodeList.indexOf(convertHourMinToRequestCode(0,15)) );
-
                 alarmDatabase.startAlarmWithRequestCode(0,15);
-
-//                alarmDatabase.getAlarmListDatabase().add(alarmDatabase.convertHourMinToRequestCode(0,15));
-//                alarmDatabase.startAlarmWithRequestCode(alarmDatabase.getAlarmListDatabase().get(alarmDatabase.getAlarmListDatabase().indexOf(alarmDatabase.convertHourMinToRequestCode(0,15))) );
-
 
             } else {
 //                Toast.makeText(getActivity(), "Switch 10m Off", Toast.LENGTH_SHORT).show();
 //                System.out.println(" check from alarmdatabase: "+ alarmRequestCodeList.indexOf(convertHourMinToRequestCode(0,15)));
-
                 alarmDatabase.cancelAlarm(0, 15);
-
-//                cancelAlarm(alarmRequestCodeList.get(alarmRequestCodeList.indexOf( convertHourMinToRequestCode(0,15)  ) ));
-//                alarmRequestCodeList.remove(alarmRequestCodeList.indexOf( convertHourMinToRequestCode(0,15)  ));
-
-
             }
         } );
 
         toggle30m = view.findViewById(R.id.switch30m);
         toggle30m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
-//            requestCode = mainActivity.convertHourMinToRequestCode(0,30);
-
             if (isChecked) {
                 checkSwitches(toggle30m);
-//                mainActivity.startAlarmWithRequestCode(requestCode );
-//                alarmRequestCodeList.add(mainActivity.convertHourMinToRequestCode(0,30) );
-//                mainActivity.startAlarmWithRequestCode(alarmRequestCodeList.get(alarmRequestCodeList.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
                 alarmDatabase.startAlarmWithRequestCode(0,30);
             } else {
                 alarmDatabase.cancelAlarm(0, 30);
-//                mainActivity.cancelAlarm(requestCode );
-//                mainActivity.cancelAlarm(alarmRequestCodeList.get(alarmRequestCodeList.indexOf( mainActivity.convertHourMinToRequestCode(0,30) ) ) );
-//                alarmRequestCodeList.remove(mainActivity.convertHourMinToRequestCode(0,30));
+
             }
         }));
 
         toggle45m = view.findViewById(R.id.switch45m);
         toggle45m.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-//                checkSwitches(toggle45m);
-//                startAlarmWithRequestCode(10);
+                checkSwitches(toggle45m);
                 alarmDatabase.startAlarmWithRequestCode(0,45);
             } else {
 //                cancelAlarm();
@@ -109,7 +161,7 @@ public class HomeFragment extends Fragment {
         toggle1h = view.findViewById(R.id.switch1h);
         toggle1h.setOnCheckedChangeListener( ((buttonView, isChecked) -> {
             if (isChecked) {
-//                checkSwitches(toggle1h);
+                checkSwitches(toggle1h);
                 alarmDatabase.startAlarmWithRequestCode(1,0);
             } else {
                 alarmDatabase.cancelAlarm(1, 0);

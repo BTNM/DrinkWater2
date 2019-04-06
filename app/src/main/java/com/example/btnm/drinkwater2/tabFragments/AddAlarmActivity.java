@@ -48,12 +48,8 @@ public class AddAlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_alarm);
 
-
         setupImageSpinner();
-//        ImageView tempImage = (ImageView) findViewById(R.id.testImage);
-
         setupHourMinutePicker();
-
         setupButtons();
 
 
