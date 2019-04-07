@@ -47,7 +47,7 @@ public class AlarmsFragment extends Fragment {
     private FloatingActionButton floatingButton;
 
 //    private static final String FILE_NAME = "DrinkWaterStorage.txt";
-    private static final String FILE_NAME = "internalStorageTest1.txt";
+    private static final String FILE_NAME = "internalStorageTest3.txt";
 
 
     @Nullable
@@ -58,10 +58,10 @@ public class AlarmsFragment extends Fragment {
         // create adapter and layout manager, and set data list to the adapter, before setting recycle view to the adapater and layout manager
 //        initTestData();
         initRecycleView(view);
-//        readAlarmListFromStorage();
+        readAlarmListFromStorage();
 
 //        alarmDatabase = new AlarmDatabase(getContext(), alarmRequestCodeList);
-        setupButton(view);
+        setupFloatingButton(view);
 
 //        writeAlarmListToStorage();
 
@@ -96,9 +96,14 @@ public class AlarmsFragment extends Fragment {
                 // add new alarm item to recycleview from activity
                 AlarmItem tempAlarmItem = new AlarmItem(iconPosition, (hourDur+" "+minuteDur) );
 //                listData.add(tempAlarmItem);
-                addAlarmItemToListAndStorage(tempAlarmItem, false);
 
-                readAlarmListFromStorage();
+//                String name = getContext().getFilesDir().getName();
+//                System.out.println("File name: "+ name);
+
+                //add item to listdata which recycleview has set adapter to, then notify to update recycle view
+                addAlarmItemToListAndStorage(tempAlarmItem, true);
+
+//                readAlarmListFromStorage();
 
                 // notify adapter to update recycleview
                 adapter.notifyItemInserted(listData.size() );
@@ -112,11 +117,27 @@ public class AlarmsFragment extends Fragment {
     }
 
     public void addAlarmItemToListAndStorage (AlarmItem alarmItem, boolean appendToFile) {
-//        listData.add(alarmItem);
-        String tempLine = ""+alarmItem.getImageID()+" "+ alarmItem.getRepeatingAlarmTime();
+        listData.add(alarmItem);
+        String tempLine = ""+alarmItem.getImageID()+" "+ alarmItem.getRepeatingAlarmTime()+"\n";
         writeFile(tempLine, appendToFile);
     }
 
+    public void writeAlarmListToStorage() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (AlarmItem alarmItem : listData) {
+            String temp = alarmItem.getImageID() + alarmItem.getRepeatingAlarmTime() + "\n";
+            stringBuilder.append(temp);
+        }
+        System.out.println(stringBuilder.toString());
+//        return stringBuilder.toString();
+    }
+
+    /**
+     * write string to internal storage
+     * @param addLine
+     * @param appendToFile
+     */
     public void writeFile (String addLine, Boolean appendToFile) {
 //        String fileName = "App test file.txt";
 //        String inputText = "testing write to file";
@@ -128,12 +149,12 @@ public class AlarmsFragment extends Fragment {
         try {
             file = getContext().getFilesDir().getAbsoluteFile(); // get the absolute path to the directory
 
-            if (appendToFile) {
+            if (appendToFile ) {
                 fileOutputStream = getContext().openFileOutput(FILE_NAME, Context.MODE_APPEND);
             } else {
                 fileOutputStream = getContext().openFileOutput(FILE_NAME, Context.MODE_PRIVATE);
             }
-            fileOutputStream.write(inputText.getBytes());
+            fileOutputStream.write(inputText.getBytes() );
 
             Toast.makeText(getContext(), "test text saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
@@ -152,6 +173,27 @@ public class AlarmsFragment extends Fragment {
 
     }
 
+    public void readAlarmListFromStorage () {
+        String storageTxt = readFile();
+        System.out.println("storageText : " + storageTxt);
+
+        // split all text in storage by newlines
+        String[] itemListRaw = storageTxt.split("\n");
+
+        for (String lines : itemListRaw) {
+            // split each line by space
+            String[] lineSplitted = lines.split(" ");
+
+            listData.add(new AlarmItem(Integer.valueOf(lineSplitted[0]), lineSplitted[1]+" "+lineSplitted[2]) );
+        }
+//        adapter.notifyItemInserted(listData.size() );
+//        adapter.notifyDataSetChanged();
+    }
+
+    /**
+     * read text from internal storage file
+     * @return
+     */
     public String readFile () {
         FileInputStream fileInputStream = null;
         StringBuilder stringBuilder = new StringBuilder();
@@ -185,24 +227,7 @@ public class AlarmsFragment extends Fragment {
         return stringBuilder.toString();
     }
 
-    public void readAlarmListFromStorage () {
-        String storageTxt = readFile();
-        System.out.println("storageText :" + storageTxt);
-        // split all text in storage by newlines
-        String[] itemListRaw = storageTxt.split("\n");
-
-        for (String lines : itemListRaw) {
-            // split each line by space
-            String[] lineSplitted = lines.split(" ");
-
-            listData.add(new AlarmItem(Integer.valueOf(lineSplitted[0]), lineSplitted[1]+" "+lineSplitted[2]) );
-        }
-        adapter.notifyItemInserted(listData.size() );
-        adapter.notifyDataSetChanged();
-
-    }
-
-    private void setupButton(View view) {
+    private void setupFloatingButton(View view) {
         floatingButton = (FloatingActionButton) view.findViewById(R.id.fab);
         floatingButton.setOnClickListener( (e) -> {
             Intent intent = new Intent(getContext(), AddAlarmActivity.class);
@@ -229,32 +254,14 @@ public class AlarmsFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
     }
 
-    public void writeAlarmListToStorage() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (AlarmItem alarmItem : listData) {
-            String temp = alarmItem.getImageID() + alarmItem.getRepeatingAlarmTime() + "\n";
-            stringBuilder.append(temp);
-        }
-        System.out.println(stringBuilder.toString());
-//        return stringBuilder.toString();
-    }
-
-    public void addAlarmItem() {
-
-
-
-    }
 
     private void initTestData() {
 
 //        listData.add(new AlarmItem(R.drawable.ic_android,"0 45"));
 //        listData.add(new AlarmItem(R.drawable.ic_sun,"1 15" ));
 //        listData.add(new AlarmItem(R.drawable.ic_audio,"2 0"));
-
 
 
 //        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );

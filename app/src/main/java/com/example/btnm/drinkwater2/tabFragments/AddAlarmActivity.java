@@ -80,7 +80,6 @@ public class AddAlarmActivity extends AppCompatActivity {
 
     private void setupImageSpinner() {
         //setup icon spinner with images
-
         spinner = (Spinner) findViewById(R.id.iconChooseSpinner);
 
         // an arrayadapter that takes images, then set the spinner adapter to the image array
