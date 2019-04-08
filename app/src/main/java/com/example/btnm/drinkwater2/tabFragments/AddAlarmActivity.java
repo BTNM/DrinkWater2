@@ -27,7 +27,13 @@ public class AddAlarmActivity extends AppCompatActivity {
             R.drawable.ic_sun,
             R.drawable.ic_add,
             R.drawable.ic_small_waterdrop_blue,
-            R.drawable.ic_small_waterdrop_red
+            R.drawable.ic_small_waterdrop_red,
+            R.drawable.ic_colorize,
+            R.drawable.ic_notifications,
+            R.drawable.ic_polymer,
+            R.drawable.ic_smoking,
+            R.drawable.ic_star_border,
+            R.drawable.ic_whatshot
     };
 
     public final static String ICONPOS = "com.example.btnm.ICONPOSITION";
