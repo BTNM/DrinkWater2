@@ -23,7 +23,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
-        void onItemClick (int position);
+//        void onItemClick (int position);
         void onDeleteClick(int position);
     }
 
@@ -49,7 +49,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 //        public TextView txtDescription1;
 //        public TextView txtDescription2;
 
-
         /**
          * represent each item in the recycleview, by itemView
          * @param itemView
@@ -66,16 +65,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
             //when clicking itemView which is the whole card/item, then gets current cards position and pass this position to interface method,
             // then gets click and position from adapter to activity
-            itemView.setOnClickListener( e -> {
-                if (listener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION)  {
-                        listener.onItemClick(position);
-                    }
-
-                }
-            });
-
             deleteImage.setOnClickListener( e -> {
                 if (listener != null) {
                     int position = getAdapterPosition();
@@ -85,6 +74,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
                 }
             });
+//            itemView.setOnClickListener( e -> {
+//                if (listener != null) {
+//                    int position = getAdapterPosition();
+//                    if (position != RecyclerView.NO_POSITION)  {
+//                        listener.onItemClick(position);
+//                    }
+//
+//                }
+//            });
 
         }
     }

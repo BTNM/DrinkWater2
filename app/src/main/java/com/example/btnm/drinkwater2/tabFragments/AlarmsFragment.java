@@ -259,11 +259,11 @@ public class AlarmsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                Toast.makeText(getContext(), "Clicking card/item", Toast.LENGTH_SHORT).show();
-                System.out.println("Check Clicking Card/item");
-            }
+//            @Override
+//            public void onItemClick(int position) {
+//                Toast.makeText(getContext(), "Clicking card/item", Toast.LENGTH_SHORT).show();
+//                System.out.println("Check Clicking Card/item");
+//            }
 
             @Override
             public void onDeleteClick(int position) {

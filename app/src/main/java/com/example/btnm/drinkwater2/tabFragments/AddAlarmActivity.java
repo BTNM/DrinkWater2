@@ -6,18 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
 import com.example.btnm.drinkwater2.R;
 import com.example.btnm.drinkwater2.SimpleImageArrayAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AddAlarmActivity extends AppCompatActivity {
 
@@ -25,9 +19,7 @@ public class AddAlarmActivity extends AppCompatActivity {
             R.drawable.ic_android,
             R.drawable.ic_audio,
             R.drawable.ic_sun,
-            R.drawable.ic_add,
-            R.drawable.ic_small_waterdrop_blue,
-            R.drawable.ic_small_waterdrop_red,
+            R.drawable.ic_waterdrop,
             R.drawable.ic_colorize,
             R.drawable.ic_notifications,
             R.drawable.ic_polymer,
