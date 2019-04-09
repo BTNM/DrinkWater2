@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +90,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull RecycleViewHolder recycleViewHolder, int i) {
         //binding data with the viewholder views
         recycleViewHolder.imageView.setImageResource(itemListData.get(i).getImageID() );
-        recycleViewHolder.deleteImage.setImageResource(R.drawable.ic_delete);
 
         String timeLabelFromAlarmItem = itemListData.get(i).getRepeatingAlarmTime();
         String[] alarmTime = timeLabelFromAlarmItem.split(" ");
@@ -112,6 +112,15 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
             }
 
+        });
+
+        recycleViewHolder.deleteImage.setImageResource(R.drawable.ic_delete);
+        recycleViewHolder.deleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "delete image button", Toast.LENGTH_SHORT).show();
+
+            }
         });
 
 //        recycleViewHolder
