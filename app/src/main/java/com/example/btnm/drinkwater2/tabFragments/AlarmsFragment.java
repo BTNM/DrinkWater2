@@ -3,6 +3,7 @@ package com.example.btnm.drinkwater2.tabFragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +29,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AlarmsFragment extends Fragment {
@@ -59,7 +62,7 @@ public class AlarmsFragment extends Fragment {
 //        initTestData();
         initRecycleView(view);
         readAlarmListFromStorage();
-
+        sortAlarmItemList();
 //        alarmDatabase = new AlarmDatabase(getContext(), alarmRequestCodeList);
         setupFloatingButton(view);
 
@@ -92,17 +95,14 @@ public class AlarmsFragment extends Fragment {
                 hourDuration = Integer.parseInt(hourDur);
                 minuteDuration = Integer.parseInt(minuteDur);
 
-
                 // add new alarm item to recycleview from activity
                 AlarmItem tempAlarmItem = new AlarmItem(iconPosition, (hourDur+" "+minuteDur) );
 //                listData.add(tempAlarmItem);
 
-//                String name = getContext().getFilesDir().getName();
-//                System.out.println("File name: "+ name);
-
                 //add item to listdata which recycleview has set adapter to, then notify to update recycle view
                 addAlarmItemToListAndStorage(tempAlarmItem, true);
 
+                sortAlarmItemList();
 //                readAlarmListFromStorage();
 //                updateWriteAlarmListToStorage();
 
@@ -116,6 +116,31 @@ public class AlarmsFragment extends Fragment {
         }
 
     }
+
+    public void sortAlarmItemList () {
+
+        Collections.sort(listData, new Comparator<AlarmItem>() {
+            @Override
+            public int compare(AlarmItem o1, AlarmItem o2) {
+                String[] item1 = o1.getRepeatingAlarmTime().split(" ");
+                String[] item2 = o2.getRepeatingAlarmTime().split(" ");
+
+                int hour1 = Integer.parseInt(item1[0] );
+                int min1 = Integer.parseInt(item1[1] );
+
+                int hour2 = Integer.parseInt(item2[0] );
+                int min2 = Integer.parseInt(item2[1] );
+
+
+                return hour1 < hour2 ? -1 : ( hour1 > hour2) ? 1 : 0;
+
+            }
+        });
+
+        adapter.notifyDataSetChanged();
+
+    }
+
 
     public void addAlarmItemToListAndStorage (AlarmItem alarmItem, boolean appendToFile) {
         listData.add(alarmItem);
