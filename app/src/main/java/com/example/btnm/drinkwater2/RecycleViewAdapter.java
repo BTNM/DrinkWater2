@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -15,17 +16,32 @@ import java.util.List;
 
 // Setup recycleview adapter class
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.RecycleViewHolder> {
-
     private List<AlarmItem> itemListData;
     private AlarmDatabase alarmDatabase;
     private ArrayList<Integer> alarmRequestCodeList = new ArrayList<>();
+
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick (int position);
+        void onDeleteClick(int position);
+    }
+
+    /**
+     * receive a listener from an activity and set it on own variable, and send it into constructor of recycleViewHolder,
+     * to set onClick method on each item in recycle view
+     * @param listener
+     */
+    public void setOnItemClickListener (OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     /**
      *  the layout and content of an each item in the recycleview
      *  takes the info from view in xml into each element in the recycleview
      */
     public static class RecycleViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
+        private ImageView imageView;
         private TextView repeatingAlarmTime;
         private Switch activeSwitch;
         private ImageView deleteImage;
@@ -33,7 +49,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 //        public TextView txtDescription1;
 //        public TextView txtDescription2;
 
-        public RecycleViewHolder(@NonNull View itemView) {
+
+        /**
+         * represent each item in the recycleview, by itemView
+         * @param itemView
+         */
+        public RecycleViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
@@ -42,6 +63,28 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             deleteImage = (ImageView) itemView.findViewById(R.id.delete);
 //            txtDescription1 = (TextView) itemView.findViewById(R.id.textView1);
 //            txtDescription2 = (TextView) itemView.findViewById(R.id.textView2);
+
+            //when clicking itemView which is the whole card/item, then gets current cards position and pass this position to interface method,
+            // then gets click and position from adapter to activity
+            itemView.setOnClickListener( e -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION)  {
+                        listener.onItemClick(position);
+                    }
+
+                }
+            });
+
+            deleteImage.setOnClickListener( e -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION)  {
+                        listener.onDeleteClick(position);
+                    }
+
+                }
+            });
 
         }
     }
@@ -71,7 +114,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext() );
         View itemView = inflater.inflate(R.layout.alarm_item, viewGroup, false);
 
-        RecycleViewHolder recycleViewHolder = new RecycleViewHolder(itemView);
+        RecycleViewHolder recycleViewHolder = new RecycleViewHolder(itemView, mListener);
 
         alarmDatabase = new AlarmDatabase(viewGroup.getContext(), alarmRequestCodeList);
 
@@ -115,15 +158,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         });
 
         recycleViewHolder.deleteImage.setImageResource(R.drawable.ic_delete);
-        recycleViewHolder.deleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "delete image button", Toast.LENGTH_SHORT).show();
+//        recycleViewHolder.deleteImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(v.getContext(), "delete image button", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
-            }
-        });
-
-//        recycleViewHolder
 
 //        recycleViewHolder.activeSwitch.setChecked(itemListData.get(i).getActiveSwitch().isChecked() );
 

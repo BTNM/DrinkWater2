@@ -104,7 +104,7 @@ public class AlarmsFragment extends Fragment {
                 addAlarmItemToListAndStorage(tempAlarmItem, true);
 
 //                readAlarmListFromStorage();
-                updateWriteAlarmListToStorage();
+//                updateWriteAlarmListToStorage();
 
                 // notify adapter to update recycleview
                 adapter.notifyItemInserted(listData.size() );
@@ -130,10 +130,10 @@ public class AlarmsFragment extends Fragment {
             String temp = alarmItem.getImageID() + " " + alarmItem.getRepeatingAlarmTime() + "\n";
             stringBuilder.append(temp);
         }
-        System.out.println("read listdata alarm items: "+stringBuilder.toString());
+//        System.out.println("read listdata alarm items: "+stringBuilder.toString());
 //        return stringBuilder.toString();
 
-//        writeFile(stringBuilder.toString(), false);
+        writeFile(stringBuilder.toString(), false);
     }
 
     /**
@@ -257,8 +257,28 @@ public class AlarmsFragment extends Fragment {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new RecycleViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getContext(), "Clicking card/item", Toast.LENGTH_SHORT).show();
+                System.out.println("Check Clicking Card/item");
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                deleteItemFromAlarmList(position);
+            }
+        });
     }
 
+    public void deleteItemFromAlarmList (int position) {
+        listData.remove(position);
+        adapter.notifyItemRemoved(position);
+        adapter.notifyItemRangeChanged(position, listData.size());
+
+        updateWriteAlarmListToStorage();
+    }
 
     private void initTestData() {
 
