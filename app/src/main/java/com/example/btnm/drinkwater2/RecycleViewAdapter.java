@@ -27,6 +27,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         public ImageView imageView;
         private TextView repeatingAlarmTime;
         private Switch activeSwitch;
+        private ImageView deleteImage;
+
 //        public TextView txtDescription1;
 //        public TextView txtDescription2;
 
@@ -36,6 +38,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             repeatingAlarmTime = (TextView) itemView.findViewById(R.id.alarmDuration);
             activeSwitch = (Switch) itemView.findViewById(R.id.activeSwitch);
+            deleteImage = (ImageView) itemView.findViewById(R.id.delete);
 //            txtDescription1 = (TextView) itemView.findViewById(R.id.textView1);
 //            txtDescription2 = (TextView) itemView.findViewById(R.id.textView2);
 
@@ -86,6 +89,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull RecycleViewHolder recycleViewHolder, int i) {
         //binding data with the viewholder views
         recycleViewHolder.imageView.setImageResource(itemListData.get(i).getImageID() );
+        recycleViewHolder.deleteImage.setImageResource(R.drawable.ic_delete);
 
         String timeLabelFromAlarmItem = itemListData.get(i).getRepeatingAlarmTime();
         String[] alarmTime = timeLabelFromAlarmItem.split(" ");
@@ -134,7 +138,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
      */
     private String outputItemTimeLabel(int hourDuration, int minuteDuration) {
         StringBuilder stringBuilder = new StringBuilder();
-        String hour = " Hour ";
+        String hour = " Hrs ";
         String minute = " Min ";
 
         if (hourDuration == 0) {

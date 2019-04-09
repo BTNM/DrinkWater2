@@ -104,6 +104,7 @@ public class AlarmsFragment extends Fragment {
                 addAlarmItemToListAndStorage(tempAlarmItem, true);
 
 //                readAlarmListFromStorage();
+                updateWriteAlarmListToStorage();
 
                 // notify adapter to update recycleview
                 adapter.notifyItemInserted(listData.size() );
@@ -122,15 +123,17 @@ public class AlarmsFragment extends Fragment {
         writeFile(tempLine, appendToFile);
     }
 
-    public void writeAlarmListToStorage() {
+    public void updateWriteAlarmListToStorage() {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (AlarmItem alarmItem : listData) {
-            String temp = alarmItem.getImageID() + alarmItem.getRepeatingAlarmTime() + "\n";
+            String temp = alarmItem.getImageID() + " " + alarmItem.getRepeatingAlarmTime() + "\n";
             stringBuilder.append(temp);
         }
-        System.out.println(stringBuilder.toString());
+        System.out.println("read listdata alarm items: "+stringBuilder.toString());
 //        return stringBuilder.toString();
+
+//        writeFile(stringBuilder.toString(), false);
     }
 
     /**

@@ -6,6 +6,7 @@ public class AlarmItem {
     private int imageID;
     private String repeatingAlarmTime;
     private Switch activeSwitch;
+    private int deleteID;
 
 //    private String description1;
 //    private String description2;
@@ -16,6 +17,12 @@ public class AlarmItem {
 //        this.description2 = description2;
 //    }
 
+
+//    public AlarmItem(int imageID, String repeatingAlarmTime, int deleteID) {
+//        this.imageID = imageID;
+//        this.repeatingAlarmTime = repeatingAlarmTime;
+//        this.deleteID = deleteID;
+//    }
 
     public AlarmItem(int imageID, String repeatingAlarmTime) {
         this.imageID = imageID;
@@ -28,6 +35,14 @@ public class AlarmItem {
 
     public void setImageID(int imageID) {
         this.imageID = imageID;
+    }
+
+    public int getDeleteID() {
+        return deleteID;
+    }
+
+    public void setDeleteID(int deleteID) {
+        this.deleteID = deleteID;
     }
 
     public String getRepeatingAlarmTime() {
