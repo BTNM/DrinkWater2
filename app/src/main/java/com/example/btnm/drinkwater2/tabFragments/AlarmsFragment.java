@@ -131,7 +131,6 @@ public class AlarmsFragment extends Fragment {
                 int hour2 = Integer.parseInt(item2[0] );
                 int min2 = Integer.parseInt(item2[1] );
 
-
                 return hour1 < hour2 ? -1 : ( hour1 > hour2) ? 1 : 0;
 
             }
@@ -148,6 +147,9 @@ public class AlarmsFragment extends Fragment {
         writeFile(tempLine, appendToFile);
     }
 
+    /**
+     * read current alarm list and write data to internal storage
+     */
     public void updateWriteAlarmListToStorage() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -155,8 +157,6 @@ public class AlarmsFragment extends Fragment {
             String temp = alarmItem.getImageID() + " " + alarmItem.getRepeatingAlarmTime() + "\n";
             stringBuilder.append(temp);
         }
-//        System.out.println("read listdata alarm items: "+stringBuilder.toString());
-//        return stringBuilder.toString();
 
         writeFile(stringBuilder.toString(), false);
     }
@@ -201,6 +201,9 @@ public class AlarmsFragment extends Fragment {
 
     }
 
+    /**
+     * read data from internal storage and add alarm items to list
+     */
     public void readAlarmListFromStorage () {
         String storageTxt = readFile();
         System.out.println("storageText : " + storageTxt);
@@ -310,11 +313,6 @@ public class AlarmsFragment extends Fragment {
 //        listData.add(new AlarmItem(R.drawable.ic_android,"0 45"));
 //        listData.add(new AlarmItem(R.drawable.ic_sun,"1 15" ));
 //        listData.add(new AlarmItem(R.drawable.ic_audio,"2 0"));
-
-
-//        listData.add(new AlarmItem(R.drawable.water_drop_icon,"WaterDrop"," Line 1") );
-//        listData.add(new AlarmItem(R.drawable.water_droplet2,"WaterDrop2 for testing"," Line 1" ) );
-//        listData.add(new AlarmItem(R.drawable.cartoon_water_drops,"WaterDrop3" ," Line 1") );
 
     }
 
