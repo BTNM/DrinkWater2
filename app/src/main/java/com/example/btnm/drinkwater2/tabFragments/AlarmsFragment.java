@@ -99,7 +99,7 @@ public class AlarmsFragment extends Fragment {
                 AlarmItem tempAlarmItem = new AlarmItem(iconPosition, (hourDur+" "+minuteDur) );
 //                listData.add(tempAlarmItem);
 
-                //add item to listdata which recycleview has set adapter to, then notify to update recycle view
+                //add item to listdata which recycleview has set adapter to, then notifsy to update recycle view
                 addAlarmItemToListAndStorage(tempAlarmItem, true);
 
                 sortAlarmItemList();
