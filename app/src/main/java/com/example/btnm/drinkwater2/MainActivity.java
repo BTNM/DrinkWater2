@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new HomeFragment(),"Home");
         adapter.addFragment(new AlarmsFragment(),"Alarm List");
-//        adapter.addFragment(new SettingFragments(),"Setting");
+        adapter.addFragment(new SettingFragments(),"Setting");
 
         viewPager.setAdapter(adapter);
     }

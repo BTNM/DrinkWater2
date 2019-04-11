@@ -117,6 +117,9 @@ public class AlarmsFragment extends Fragment {
 
     }
 
+    /**
+     * sort all alarm items in the list and sort in descending order
+     */
     public void sortAlarmItemList () {
 
         Collections.sort(listData, new Comparator<AlarmItem>() {
@@ -131,7 +134,9 @@ public class AlarmsFragment extends Fragment {
                 int hour2 = Integer.parseInt(item2[0] );
                 int min2 = Integer.parseInt(item2[1] );
 
-                return hour1 < hour2 ? -1 : ( hour1 > hour2) ? 1 : 0;
+                // check first if hour1 is less than hour, if true then -1 else check if hour1 are bigger etc
+                return hour1 < hour2 ? -1 : ((hour1 > hour2) ? 1 : ((min1 < min2) ? -1 : ((min1 > min2) ? 1 : 0 ) ) );
+//                return hour1 < hour2 ? -1 : ( hour1 > hour2) ? 1 : 0;
 
             }
         });
@@ -189,7 +194,7 @@ public class AlarmsFragment extends Fragment {
             }
             fileOutputStream.write(inputText.getBytes() );
 
-            Toast.makeText(getContext(), "test text saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
+//            Toast.makeText(getContext(), "test text saved to " + getContext().getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -244,7 +249,7 @@ public class AlarmsFragment extends Fragment {
                 stringBuilder.append(tempLines);
                 stringBuilder.append("\n");
             }
-            Toast.makeText(getContext(), stringBuilder.toString(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), stringBuilder.toString(), Toast.LENGTH_SHORT).show();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
