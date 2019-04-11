@@ -141,6 +141,11 @@ public class AlarmsFragment extends Fragment {
     }
 
 
+    /**
+     * add item to listData and add file to internal storage
+     * @param alarmItem
+     * @param appendToFile
+     */
     public void addAlarmItemToListAndStorage (AlarmItem alarmItem, boolean appendToFile) {
         listData.add(alarmItem);
         String tempLine = ""+alarmItem.getImageID()+" "+ alarmItem.getRepeatingAlarmTime()+"\n";
