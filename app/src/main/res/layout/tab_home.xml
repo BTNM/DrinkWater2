@@ -1,241 +1,381 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="@drawable/water_background"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2">
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.40" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.70" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.85" />
+
+
+    <TextView
+        android:id="@+id/textGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/drink_water_repetitive_alarms"
+        android:textColor="@color/design_default_color_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout15m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout30m"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline1">
 
         <TextView
-            android:id="@+id/textGrid"
+            android:id="@+id/textSwitch15m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="@string/drink_water_repetitive_alarms"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        android:alignmentMode="alignMargins"
-        android:columnOrderPreserved="false"
-        android:columnCount="7"
-        android:rowCount="7"
-        android:paddingLeft="20dp"
-        >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="3"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_10_min" />
-
-            <Switch
-                android:id="@+id/switch10m"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:showText="true"
-                android:textOff="@string/off"
-                android:textOn="@string/on" />
-
-        </LinearLayout>
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/_15_min"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/switch15m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="2"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout30m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout15m"
+        app:layout_constraintTop_toTopOf="@+id/guideline1">
+
+        <TextView
+            android:id="@+id/textSwitch30m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/_30_min"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/switch30m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="2"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout45m"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout1h"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+        <TextView
+            android:id="@+id/textSwitch45m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/_45_min"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/switch45m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_row="3"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+        <TextView
+            android:id="@+id/textSwitch1h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="1 Hour"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/switch1h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="5"
-            android:layout_row="3"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1.5h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout2h"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.538">
+
+        <TextView
+            android:id="@+id/textSwitch1.5h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="1.5 Hour"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/switch1.5h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_row="4"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnTest"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout1.5h"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintVertical_bias="0.538">
+
+        <TextView
+            android:id="@+id/textSwitch2h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="2 Hour"
+            android:textSize="18sp" />
 
         <Switch
             android:id="@+id/switch2h"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_column="4"
-            android:layout_row="4"
             android:layout_margin="8dp"
             android:fontFamily="sans-serif-condensed"
             android:showText="true"
             android:textOff="@string/off"
-            android:textOn="@string/on" />
-        <Switch
-            android:id="@+id/switch3h"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_row="5"
-            android:layout_margin="8dp"
-            android:fontFamily="sans-serif-condensed"
-            android:showText="true"
-            android:textOff="@string/off"
-            android:textOn="@string/on" />
+            android:textOn="@string/on"
+            android:thumb="@drawable/switch_thumb_custom"
+            android:thumbTextPadding="12dp"
+            android:track="@drawable/switch_track_custom" />
 
-    </GridLayout>
-
-    <Button
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="14dp"
-        android:text="Test Button 1" />
-
-</LinearLayout>
-
-    <!--<android.support.v7.widget.CardView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_row="0"-->
-    <!--android:layout_rowWeight="1"-->
-    <!--android:layout_column="0"-->
-    <!--android:layout_columnWeight="1"-->
-    <!--android:layout_marginLeft="16dp"-->
-    <!--android:layout_marginRight="16dp"-->
-    <!--android:layout_marginBottom="16dp"-->
-    <!--app:cardCornerRadius="8dp"-->
-    <!--app:cardElevation="8dp">-->
+    </LinearLayout>
 
     <!--<LinearLayout-->
-    <!--android:layout_gravity="center_horizontal|center_vertical"-->
-    <!--android:layout_margin="16dp"-->
+    <!--android:id="@+id/linearLayout "-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!---->
     <!--android:orientation="vertical"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content">-->
-
-    <!--<ImageView-->
-    <!--android:src="@drawable/ic_add"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
+    <!--android:gravity="center">-->
 
     <!--<TextView-->
-    <!--android:text="Me"-->
-    <!--android:textAlignment="center"-->
-    <!--android:textColor="@color/colorPrimaryDark"-->
-    <!--android:textSize="18sp"-->
-    <!--android:textStyle="bold"-->
+    <!--android:id="@+id/textSwitch"-->
     <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:fontFamily="sans-serif-smallcaps"-->
+    <!--android:textSize="16sp"-->
+    <!--android:text="" />-->
+
+    <!--<Switch-->
+    <!--android:id="@+id/switch "-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="8dp"-->
+    <!--android:fontFamily="sans-serif-condensed"-->
+    <!--android:showText="true"-->
+    <!--android:textOff="@string/off"-->
+    <!--android:textOn="@string/on"-->
+    <!--android:thumb="@drawable/switch_thumb_custom"-->
+    <!--android:track="@drawable/switch_track_custom"-->
+    <!--android:thumbTextPadding="12dp" />-->
 
     <!--</LinearLayout>-->
 
-    <!--</android.support.v7.widget.CardView>-->
+    <!--<Button-->
+        <!--android:id="@+id/btnTest"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginStart="40dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:text="Test Button 1"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/guideline6"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/guideline4"-->
+        <!--app:layout_constraintVertical_bias="0.485" />-->
 
-    <!--<android.support.v7.widget.CardView-->
-    <!--android:layout_width="2218dp"-->
-    <!--android:layout_height="0dp"-->
-    <!--android:layout_row="0"-->
-    <!--android:layout_rowWeight="1"-->
-    <!--android:layout_column="0"-->
-    <!--android:layout_columnWeight="1"-->
-    <!--android:layout_marginLeft="16dp"-->
-    <!--android:layout_marginRight="16dp"-->
-    <!--android:layout_marginBottom="16dp"-->
-    <!--app:cardCornerRadius="8dp"-->
-    <!--app:cardElevation="8dp">-->
+    <!--<Button-->
+        <!--android:id="@+id/alarmTestBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:text="Test Alarm Btn"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/guideline6"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/btnTest"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/guideline4" />-->
 
-    <!--<LinearLayout-->
-    <!--android:layout_gravity="center_horizontal|center_vertical"-->
-    <!--android:layout_margin="16dp"-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content">-->
 
-    <!--<ImageView-->
-    <!--android:src="@drawable/ic_add"-->
-    <!--android:layout_gravity="center_horizontal"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
+</android.support.constraint.ConstraintLayout>
 
-    <!--<TextView-->
-    <!--android:text="Me"-->
-    <!--android:textAlignment="center"-->
-    <!--android:textColor="@color/colorPrimaryDark"-->
-    <!--android:textSize="18sp"-->
-    <!--android:textStyle="bold"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <!--</LinearLayout>-->
-
-    <!--</android.support.v7.widget.CardView>-->
