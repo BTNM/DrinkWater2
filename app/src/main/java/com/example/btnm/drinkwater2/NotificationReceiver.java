@@ -9,9 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.provider.Settings;
+import android.support.v4.app.JobIntentService;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -46,15 +50,27 @@ public class NotificationReceiver extends BroadcastReceiver {
 //
 //        wakeLock.release();
 
+//        JobIntentService.enqueueWork(context, intent);
+
         turnScreenOn(context);
+
+        setupSoundNotification(context);
         setupNotification(context);
+
+
+    }
+
+    private void setupSoundNotification(Context context) {
+
+        MediaPlayer mediaplayer = MediaPlayer.create(context, Settings.System.DEFAULT_RINGTONE_URI);
+        mediaplayer.start();
 
     }
 
     public void turnScreenOn(Context context) {
         // uses power manager to turn on illumination for an instant before releasing to save battery life, usually for notification
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        WakeLock wakeLock = powerManager.newWakeLock( PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
+        WakeLock wakeLock = powerManager.newWakeLock( PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
 //        PowerManager.SCREEN_BRIGHT_WAKE_LOCK
         if (wakeLock != null) {
             wakeLock.acquire();
