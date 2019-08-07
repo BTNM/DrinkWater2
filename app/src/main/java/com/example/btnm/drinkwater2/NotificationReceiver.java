@@ -28,7 +28,7 @@ import java.util.Calendar;
 public class NotificationReceiver extends BroadcastReceiver {
     String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
     int notificationId = 1;
-
+    WakeLock wakeLock;
 
     // alarm/action that are triggered with the alarm manager intent
     @Override
@@ -53,10 +53,11 @@ public class NotificationReceiver extends BroadcastReceiver {
 //        JobIntentService.enqueueWork(context, intent);
 
         turnScreenOn(context);
-
-        setupSoundNotification(context);
         setupNotification(context);
 
+//        setupSoundNotification(context);
+
+//        wakeLock.release();
 
     }
 
@@ -70,7 +71,7 @@ public class NotificationReceiver extends BroadcastReceiver {
     public void turnScreenOn(Context context) {
         // uses power manager to turn on illumination for an instant before releasing to save battery life, usually for notification
         PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        WakeLock wakeLock = powerManager.newWakeLock( PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
+        wakeLock = powerManager.newWakeLock( PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "myapp:MyWakeLockTag");
 //        PowerManager.SCREEN_BRIGHT_WAKE_LOCK
         if (wakeLock != null) {
             wakeLock.acquire();
